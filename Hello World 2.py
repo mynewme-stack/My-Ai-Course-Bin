@@ -1,2 +1,2 @@
-print("Hello world") #for output
-#Comments
+print("Hello, World!") #for output
+# Now program ends
