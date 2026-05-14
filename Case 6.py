@@ -23,7 +23,7 @@ print ('Modulo: ', a % b)
 print ('Power: ', a ** b) 
 
 
-# cycle 2
+# Another Example with different string but same working 
 
 a = 21
 b = 10
