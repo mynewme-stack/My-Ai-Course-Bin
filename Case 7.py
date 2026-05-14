@@ -1,7 +1,5 @@
 a = 5
-
 b = 2
-
 # equal to operator
 print(' a == b =', a == b)
 
@@ -19,3 +17,5 @@ print('a >= b =', a >= b)
 
 # less than or equal to operator
 print('a <= b =', a <= b)
+#My Check
+print("Is number 9 equals to number 1;     ", 9==1)
