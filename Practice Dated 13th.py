@@ -17,4 +17,5 @@ discount = int(3)
 percentage= float(3 / net_total * 100)
 print (product_warehouse+product_title)
 print (product_warehouse    +str(price))
-print (3/net_total * 100)
+percentage: float = (3/net_total) * 100
+print(percentage)
