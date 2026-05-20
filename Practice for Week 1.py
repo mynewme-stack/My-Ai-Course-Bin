@@ -20,7 +20,5 @@ for i in book_title:
 age = int(input("Please enter your age: "))
 if age > 10:
     print("Greater!")
-else : 
-    print()
 
 
