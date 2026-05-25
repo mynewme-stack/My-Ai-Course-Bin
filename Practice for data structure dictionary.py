@@ -8,8 +8,8 @@ mobile_list["G"] = 90
 print(type(mobile_list))
 for i in mobile_list:
     print(mobile_list[i])
-mobile_list.pop(0)
-print(type(mobile_list))
+mobile_list.pop("B")
+print(mobile_list)
 
 
 
