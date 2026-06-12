@@ -63,3 +63,6 @@ for index, i in np.ndenumerate(acre_size_2d):
     print(index,i)
 acre_size_2d_re = np.reshape(acre_size_2d, (2, 200))
 print(acre_size_2d_re)
+clean_arr = price[~np.isnan(price)]
+
+print(clean_arr)
