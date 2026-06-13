@@ -4,24 +4,24 @@ print(p)
 print('File review:\n', p.to_string())            # all values 
 print("Data type of file: ",p.dtypes)
 print('Information: ',p.info)
-print('only first 3: ',p.head(3))
-print('last 2: ',p.tail(2))
-print('statistics: ',p.describe())
-print('shape: ', p.shape)
-column1 = p['Serial Number']
-print('Serial: ', column1.to_string())
-column_2_3 = p[['List Year','Date Recorded']]
-print('Column list year and date: ', column_2_3)
+print('Only first Three Rows: ',p.head(3))
+print('Last Two Rows: ',p.tail(2))
+print('Some Statistics Functions Applied: ',p.describe())
+print('Shape of Datset: ', p.shape)
+column1 = p['address']
+print('Address: ', column1.to_string())
+column_2_3 = p[['city','country']]
+print('City and Country: ', column_2_3)
 # only index used to show 
 column_4 = p.loc[4]
-print('column 4: ', column_4)
+print('Column 4: ', column_4)
 column_5_6 = p.loc[[5,6]]
 print('Column 5 and 6',column_5_6)
 # slice of rows
 slice_row = p.loc[0:4]
 print('Rows 1 to 4: ', slice_row)
 # slice with condtions 
-residential = p.loc[p['Property Type'] == 'Residential']
+residential = p.loc[p['name'] == 'McDonald\'s']
 print('Only residentials are:\n',residential.to_string())
 # only one column
 only_column = p.loc[:,'Serial Number']
