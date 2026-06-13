@@ -1,12 +1,6 @@
 import pandas as pd
-p = pd.read_csv('Real_Estate_Sales_2001-2022_GL-Short.csv', delimiter=',',parse_dates=['Date Recorded'], date_format={'date_added': '%m/%d/%Y'} )
-fill = {}                                #Empty dictionary 
-for i in p.columns:                      # loop goes through every column name
-    if p[i].dtype != 'object':             # If data type of a value not a string
-        fill[i] = 0                     # instead of giving Nan give it 0
-    else:                                   
-        fill[i] = 'N/A'                 # if string than nan written
-p = p.fillna(value=fill)            # fill values with dictionary
+p = pd.read_csv('FastFoodRestaurants.csv', delimiter=',')
+print(p)
 print('File review:\n', p.to_string())            # all values 
 print("Data type of file: ",p.dtypes)
 print('Information: ',p.info)
@@ -78,30 +72,3 @@ print("after few changes:\n",p)
 select_row = p.query('`Sale Amount` < 50000')
 print(select_row.to_string())
 print(len(select_row))
-#all
-pd.set_option('display.max_rows', None)
-pd.set_option('display.max_columns', None)
-print('final:',p)
-# storing in ascending order
-sorted_p= p.sort_values(by='Sale Amount')
-print(sorted_p.to_string(index=False))
-# sorting columns 
-df1 = p.sort_values(by =['serial Number','Sale Amount'])
-print(df1.to_string(index=False))
-# groupby
-grouped = p.groupby('Property Type')['Sale Amount'].sum()
-print(grouped.to_string())
-print('grouped:\n',len(grouped))
-# MISSING VALUES
-p_clean = p.dropna()
-print(p_clean)
-# filling nan
-p.fillna(0, inplace= True)
-print(p)
-# data list
-lists = [1,2,3,4]
-array1 = pd.array(lists)
-print(array1)
-# now with data type
-array2 = pd.array([2020177],dtype='float')
-print(array2)

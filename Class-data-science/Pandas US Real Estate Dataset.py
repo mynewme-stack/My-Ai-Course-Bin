@@ -101,7 +101,7 @@ p.rename(index={6:1},inplace=True)
 p.rename(mapper={7:2,8:3,9:4},axis=0,inplace=True)
 print("after few changes:\n",p)
 # selecting row with condition
-select_row = p.query('price < 50000')
+select_row = p.query('`price` < 50000')
 print(select_row.to_string)
 print(len(select_row))
 #all
