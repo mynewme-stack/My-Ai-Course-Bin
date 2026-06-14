@@ -1,5 +1,5 @@
 import numpy as np
-brokered_by, status, price, bed, bath,acre_lot, zip_code,house_size = np.genfromtxt('Datasets/RealEstate-USA.csv', delimiter=',', usecols= (0,1,2,3,4,6,9,10), unpack=True ,dtype= float, skip_header=1 )
+brokered_by, status, price, bed, bath,acre_lot, zip_code,house_size = np.genfromtxt('Datasets/RealEstate-USA.csv', delimiter=',', usecols= (0,1,2,3,4,6,9,10), unpack=True ,dtype= None, skip_header=1 )
 
 # Output data
 
@@ -7,8 +7,8 @@ print(f'Brokered by: {brokered_by}')
 print(f'Status: {status}')
 print(f'Price: {price}')
 print(f'Zipcode: {zip_code}')
-print(f'Beds: {bed}')
-print(f'Baths: {bath}')
+print(f'Bedrooms: {bed}')
+print(f'Bathrooms: {bath}')
 
 # Maximum and Minimum value
 
@@ -56,13 +56,15 @@ print("Tanh = ", np.tanh(bed))
 
 # Inverse hyperbolic
 
-print("Inverse Sinh = ", np.arcsinh(pricepi))
-print("Inverse Cosh = ", np.arccosh(pricepi))
-print("Inverse Tanh = ", np.arctanh(pricepi))
+bath_ratio = bath/ (bath+1)       # Inverse hyperbolic tangent needs value between 0 and 1
+
+print("Inverse Sinh = ", np.arcsinh(bath))
+print("Inverse Cosh = ", np.arccosh(bath))
+print("Inverse Tanh = ", np.arctanh(bath_ratio))
 
 # Exponential Value
 
-print("Exponential value = ", np.exp(pricepi))
+print("Exponential value = ", np.exp(bed))
 
 # Logarithm
 
@@ -106,5 +108,4 @@ for index, i in np.ndenumerate(acre_size_2d):
 # Reshaping
 
 acre_size_2d_re = np.reshape(acre_size_2d, (2, -1))
-print(acre_size_2d_re)
-acre_size_2d_re = acre_size_2d_re[np.isfinite(acre_size_2d_re)]
+print('Reshaped:\n',acre_size_2d_re)

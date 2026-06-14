@@ -1,7 +1,13 @@
 import numpy as np
 latitude,longitude = np.genfromtxt("Class-data-science/FastFoodRestaurants.csv", delimiter=",",usecols=(4,5),unpack=True,dtype= float,skip_header=1,invalid_raise=False)
+
+# Displaying Output
+
 print(latitude)
 print(longitude)
+
+# Basic Statistics
+
 print("Maximium Longitude = ", max(longitude))
 print("Minimium Latitude = ", min(latitude))
 print("Mean of Longitude = ", np.mean(longitude))
@@ -10,6 +16,7 @@ print("Standard longitude = ", np.std(longitude))
 print("Median = " ,np.median(longitude))
 print("Percentile of 50% = ", np.percentile(longitude, 50))
 print("Percentile of 25% = ", np.percentile(longitude, 25))
+
 # Math Operations
 print("Square root of longitude = ", np.sqrt(longitude))
 print("Square of longitude = ", np.square(longitude))

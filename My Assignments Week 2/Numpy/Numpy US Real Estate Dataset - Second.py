@@ -105,5 +105,5 @@ for index, i in np.ndenumerate(salrat_2d):               # Index,Value
 
 # Reshaping
 
-salrat_2d_re = np.reshape(salrat_2d, (2, -1))            #
+salrat_2d_re = np.reshape(salrat_2d, (2, -1))            # (2,-1) Numpy calculates 142 automatically
 print(f"Reshaped: {salrat_2d_re}")
