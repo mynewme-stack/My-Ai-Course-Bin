@@ -63,31 +63,50 @@ print("Inverse Tanh = ", np.arctanh(price))
 
 # Exponential Value
 
-print("Exponential values = ", np.exp(np.clip(pricepi, None, 1)))
+print("Exponential value = ", np.exp(np.clip(pricepi, None, 1)))
 
 # Logarithm
 
 print("Log :", np.log(pricepi))
 print("Base 10 Log :", np.log10(pricepi))
 
+# 2nd dimension
+
 acre_size_2d = np.array([acre_lot, house_size])
 print("2D array: ",acre_size_2d)
+
+# Characteristics
+
 print("Dimesion of Acre lot: ",acre_size_2d.ndim) 
 print("Size : ", acre_size_2d.size)
 print("Shape : ", acre_size_2d.shape)
 print("Data Type : ", acre_size_2d.dtype)
+
 # Slicing
-acre_size_2d_slice_1 = acre_size_2d[0:1 , 1:5]
-print("Sliced : ", acre_size_2d_slice_1)
-# IN dexing
-acre_size_item = acre_size_2d_slice_1[0,1]
+
+acre_size_2d_slice = acre_size_2d[0:1 , 1:5]
+print("Sliced : ", acre_size_2d_slice)
+
+# Indexing
+
+acre_size_item = acre_size_2d_slice[0,1]
 print("One item : ",acre_size_item)
+
+# Ways of showing output
+
+# 1. Without index
+
 for i in np.nditer(acre_size_2d):
     print(i)
+
+# 2. With Index
+
 for index, i in np.ndenumerate(acre_size_2d):
     print(index,i)
-acre_size_2d_re = np.reshape(acre_size_2d, (2, 200))
-print(acre_size_2d_re)
-clean_arr = price[~np.isnan(price)]
 
+# Reshaping
+
+acre_size_2d_re = np.reshape(acre_size_2d, (2, -1))
+print(acre_size_2d_re)
+clean_arr = np.isfinite(price)
 print(clean_arr)
