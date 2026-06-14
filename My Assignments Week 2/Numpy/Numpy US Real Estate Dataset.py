@@ -1,5 +1,5 @@
 import numpy as np
-brokered_by, status, price, bed, bath,acre_lot, zip_code,house_size = np.genfromtxt('Datasets/RealEstate-USA.csv', delimiter=',', usecols= (0,1,2,3,4,6,9,10), unpack=True ,dtype= None, skip_header=1 )
+brokered_by, status, price, bed, bath,acre_lot, zip_code,house_size = np.genfromtxt('Datasets/RealEstate-USA.csv', delimiter=',', usecols= (0,1,2,3,4,6,9,10), unpack=True ,dtype= float, skip_header=1 )
 
 # Output data
 
@@ -12,14 +12,13 @@ print(f'Baths: {bath}')
 
 # Maximum and Minimum value
 
-print("Maximium price = ", max(price))
-print("Minimium price = ", min(price))
+print("Maximum price = ", max(price))
+print("Minimum price = ", min(price))
 
 # Basic Statistics
 
 print("Mean of Price = ", np.mean(price))
 print("Average of price = ", np.average(price))
-print("Standard Deviation= ", np.std(price))
 print("Median= " ,np.median(price))
 print("Percentile of 10% = ", np.percentile(price, 10))
 print("Percentile of 5% = ", np.percentile(price, 5))
@@ -45,25 +44,25 @@ print("Floor Division of Bedrooms and Bathrooms: ", bed // bath)
 pricepi = np.pi * price
 print("Price Pie = ", pricepi)
 
-print("Sine = ", np.sin(price))
-print("Cosine = ", np.cos(price))
-print("Tangent = ", np.tan(price))
+print("Sine = ", np.sin(pricepi))
+print("Cosine = ", np.cos(pricepi))
+print("Tangent = ", np.tan(pricepi))
 
 # Hyperbolic
 
-print("Sinh = ", np.sinh(price))
-print("Cosh = ", np.cosh(pricepi))
-print("Tanh = ", np.tanh(price))
+print("Sinh = ", np.sinh(bed))
+print("Cosh = ", np.cosh(bed))
+print("Tanh = ", np.tanh(bed))
 
 # Inverse hyperbolic
 
-print("Inverse Sinh = ", np.arcsinh(price))
-print("Inverse Cosh = ", np.arccosh(price))
-print("Inverse Tanh = ", np.arctanh(price))
+print("Inverse Sinh = ", np.arcsinh(pricepi))
+print("Inverse Cosh = ", np.arccosh(pricepi))
+print("Inverse Tanh = ", np.arctanh(pricepi))
 
 # Exponential Value
 
-print("Exponential value = ", np.exp(np.clip(pricepi, None, 1)))
+print("Exponential value = ", np.exp(pricepi))
 
 # Logarithm
 
@@ -77,7 +76,7 @@ print("2D array: ",acre_size_2d)
 
 # Characteristics
 
-print("Dimesion of Acre lot: ",acre_size_2d.ndim) 
+print("Dimension of Acre lot: ",acre_size_2d.ndim) 
 print("Size : ", acre_size_2d.size)
 print("Shape : ", acre_size_2d.shape)
 print("Data Type : ", acre_size_2d.dtype)
@@ -108,5 +107,4 @@ for index, i in np.ndenumerate(acre_size_2d):
 
 acre_size_2d_re = np.reshape(acre_size_2d, (2, -1))
 print(acre_size_2d_re)
-clean_arr = np.isfinite(price)
-print(clean_arr)
+acre_size_2d_re = acre_size_2d_re[np.isfinite(acre_size_2d_re)]
