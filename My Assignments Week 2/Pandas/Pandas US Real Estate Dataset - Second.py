@@ -43,24 +43,33 @@ print('Fifth and Sixth Row:\n',column_5_6.to_string())
 slice_row = p.loc[0:4]
 print('First Five Rows:\n', slice_row.to_string())
 
-# slice with condtions 
+# Slice with condtions 
 
 residential = p.loc[p['Property Type'] == 'Residential']
 print('Only residentials are:\n',residential.to_string())
 
-# only one column
+# Only one column and all rows
+
 only_column = p.loc[:,'Serial Number']
-print('only serial numbers',only_column)
-#multi
+print('Only Serial Numbers', only_column)
+
+# Multiple 
+
 multi_column = p.loc[:,'Serial Number':'List Year']
-print("only 2 columns",multi_column)
-# slice of columns
+print("Only Two columns",multi_column)
+
+# Slice of columns
+
 date_year = p.loc[:5,'List Year':'Date Recorded']
-print("First five dates and years:\n", date_year)
-# more than one with a condtion
+print("First six dates and years:\n", date_year)
+
+# Multiple columns with a condition
+
 property_type = p.loc[p['Property Type']=='Commercial','Serial Number':'List Year']
 print("Commercial:\n ",property_type)
+
 # New 
+
 p_new = pd.read_csv('Real_Estate_Sales_2001-2022_GL-Short.csv',index_col = 'Sale Amount')
 fill = {col: (0 if p_new[col].dtype != 'object' else 'N/A') for col in p_new.columns}
 p_new=p_new.fillna(value=fill)
