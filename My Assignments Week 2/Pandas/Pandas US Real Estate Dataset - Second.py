@@ -8,9 +8,9 @@ p = p.fillna(value=fill)
 
 # Displaying 
 
-print('\nFile Review:\n', p.to_string())            # all values 
-print("\nData Type of File:\n",p.dtypes)
-print('\nInformation:\n',p.info)
+print(f'\nFile Review:\n{p.to_string()}')            # all values 
+print(f'\nData Type of File:\n{p.dtypes}')
+print(f'\nInformation:\n{p.info}')
 
 print('\nOnly First Three Rows:\n',p.head(3))
 print('\nLast Two Rows:\n',p.tail(2))
@@ -65,36 +65,63 @@ print("First six dates and years:\n", date_year)
 
 # Multiple columns with a condition
 
-property_type = p.loc[p['Property Type']=='Commercial','Serial Number':'List Year']
+property_type = p.loc[p['Property Type']=='Commercial','Serial Number':'Sale Amount']
 print("Commercial:\n ",property_type)
 
-# New 
+# Makes it index 
 
-p_new = pd.read_csv('Real_Estate_Sales_2001-2022_GL-Short.csv',index_col = 'Sale Amount')
+p_new = pd.read_csv('Datasets/Real_Estate_Sales_2001-2022_GL-Short.csv',index_col = 'Serial Number')
 fill = {col: (0 if p_new[col].dtype != 'object' else 'N/A') for col in p_new.columns}
 p_new=p_new.fillna(value=fill)
-print('Only:\n',p_new)
-fifth_row = p_new.loc[248400.00]
-print('fifth: ',fifth_row)
-#slice
-nowslice = p_new.loc[248400.00:775000.00]
-print(nowslice)
-# i loc
+print(f'\n\n\nOnly:\n{p_new}')
+
+# Using .loc to print a specific row from a value from column
+
+fifth_row = p_new.loc[200500]
+print('\nFifth Row:\n',fifth_row)
+
+# Slicing
+
+nowslice = p_new.loc[200500:20058]
+print(f'\nSlice of Fifth to Seventh Rows:\n{nowslice}')
+
+# Using i.loc
+
 two = p_new.iloc[2]
-print('Now with index:\n',two)
+print('Now using i.loc:\n',two)
+
+# Multiple row
+
 two_three = p_new.iloc[[0,3]]
-print('Only two',two_three)
-my_selection = p_new.iloc[0:2,0:2]
-print('selected square:\n',my_selection)
+print('Only two rows:\n',two_three)
+
+# Specific selection by specifying rows and columns
+
+my_selection = p_new.iloc[0:2,0:1]
+print(f'Selected Square:\n{my_selection}')
 print(my_selection.shape)
-print(p.columns.tolist())
+
+# Conversion of Series in list 
+
+print(p_new.tolist())
+
+# Addition of a row
+
 p.loc[len(p.index)] = [2020177,2020,'04/14/2021','Ansonia','323 BEAVER ST',133000.00,248400.00,0.5354,'Residential','Single Family',None,None,None,'POINT (-73.06822 41.3504)']
-print('addition: ',p.tail(1))
-# removing
+print('Addition of one row:\n',p.tail(1))
+
+# Removing a row 
+
 p.drop(142, axis=0,inplace=True)
-print('After removal:\n',p.tail(1))
+print('After Removal:\n',p.tail(1))
+
+# Removing columns
+
 p.drop(['OPM remarks','Location'], axis=1,inplace=True)
 print(p.columns.tolist())
+
+# Renaming Columns and rows
+
 p.rename(columns={'Serial Number': 'serial Number'}, inplace=True)
 p.rename(mapper={'List Year': 'list year','Date Recorded':'date recorded'},axis= 1, inplace=True)
 print("after few changes:\n",p)
