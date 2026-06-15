@@ -120,20 +120,28 @@ print('After Removal:\n',p.tail(1))
 p.drop(['OPM remarks','Location'], axis=1,inplace=True)
 print(p.columns.tolist())
 
-# Renaming Columns and rows
+# Renaming Columns 
 
-p.rename(columns={'Serial Number': 'serial Number'}, inplace=True)
-p.rename(mapper={'List Year': 'list year','Date Recorded':'date recorded'},axis= 1, inplace=True)
+p.rename(columns={'Serial Number': 'serial Number'}, inplace=True)                                # Single
+p.rename(mapper={'List Year': 'list year','Date Recorded':'date recorded'},axis= 1, inplace=True) # Multiple
 print("after few changes:\n",p)
-# rename rows
+
+# Rename rows
+
 p.rename(index={0:1},inplace=True)
-p.rename(mapper={1:2,3:1,2:1000000000},axis=0,inplace=True)
-print("after few changes:\n",p)
-# selecting row with condition
+p.rename(mapper={1:2,2:3,3:4},axis=0,inplace=True)
+print(p.rows.to_list())
+
+print("After few changes:\n",p.to_string())
+
+# Selecting row with condition
+
 select_row = p.query('`Sale Amount` < 50000')
 print(select_row.to_string())
 print(len(select_row))
-#all
+
+#
+
 pd.set_option('display.max_rows', None)
 pd.set_option('display.max_columns', None)
 print('final:',p)
