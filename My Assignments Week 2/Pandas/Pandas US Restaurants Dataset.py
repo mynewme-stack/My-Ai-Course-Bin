@@ -101,6 +101,9 @@ print('After Removal:\n',p.tail(1))
 
 p.drop(['websites','postalCode'], axis=1,inplace=True)
 print(p.columns.tolist())
+
+# Rename column
+
 p.rename(columns={'country': 'Country'}, inplace=True)
 p.rename(mapper={'province': 'Province','city':'City'},axis= 1, inplace=True)
 print("Changed column names:\n",p)
