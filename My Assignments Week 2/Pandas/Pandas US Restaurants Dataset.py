@@ -8,10 +8,10 @@ print(f'File: {p}')
 print('File Review:\n', p.to_string())            # all values 
 print("Data Type of File:\n",p.dtypes)
 p.info()
-print('Only First Three Rows:\n',p.head(3))
-print('Last Two Rows:\n',p.tail(2))
-print('Some Statistics Functions Applied:\n',p.describe())
-print('Shape of Datset:\n', p.shape)
+print('Only First Two Rows:\n',p.head(2))
+print('Last Four Rows:\n',p.tail(4))
+print('Some Statistics Function Applied:\n',p.describe())
+print('Shape of Datframe:\n', p.shape)
 
 # Access Column with name
 
@@ -23,21 +23,21 @@ print('City and Country: ', column_2_3)
 
 # Only index used to show 
 
-column_4 = p.loc[4]
-print('Column 4: ', column_4)
+row_4 = p.loc[4]
+print('Rows 4: ', row_4)
 # Multiple
-column_5_6 = p.loc[[5,6]]
-print('Column 5 and 6',column_5_6)
+row_5_6 = p.loc[[5,6]]
+print('Rows 5 and 6',row_5_6)
 
 # Slice of rows
 
 slice_row = p.loc[0:4]
 print('Rows 1 to 4: ', slice_row)
 
-# Slice with condtions 
+# Conditioning with slicing
 
-restaurant = p.loc[p['name'] == 'McDonald\'s']
-print('Only Residentials are:\n',restaurant.to_string())
+property_type = p.loc[p['name'] == 'McDonald\'s','latitude':'longitude']
+print("Only McDonald\'s:\n ",property_type)
 
 # Only one column
 
@@ -53,11 +53,6 @@ print("Only Two Columns:\n",multi_column)
 
 date_year = p.loc[:6,'city':'longitude']
 print("First Seven Rows with city,country,keys,latitude and longitude:\n", date_year)
-
-# Conditioning with slicing
-
-property_type = p.loc[p['name'] == 'McDonald\'s','latitude':'longitude']
-print("Only McDonald\'s:\n ",property_type)
 
 # New indexing 
 
