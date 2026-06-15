@@ -6,20 +6,34 @@ import matplotlib.pyplot as plt
 df = pd.read_csv('Datasets/Real_Estate_Sales_2001-2022_GL-Short.csv', delimiter=',')
 print(f'DataFrame:\n{df}')
 
+# Data for graph
+new_df = df.query('`Sale Amount` < 1000' and '`Sales Ratio` < 1000')
+
+# Lineplot with darkgrid
 sns.set_theme(style='darkgrid')
-sns.lineplot(x = 'Sale Amount', y = 'Sales Ratio',data= df)
+sns.lmplot(x = 'Sale Amount', y = 'Sales Ratio',data= new_df)
 plt.show()
 
-sns.set_theme(style='darkgrid')
-sns.lineplot(x='Sales Ratio', y='Sale Amount',data= df)
+# Lineplot with whitegrid
+sns.set_theme(style='whitegrid')
+sns.lmplot(x='Sales Ratio', y='Sale Amount',data= df)
 plt.show()
 
-sns.set_theme(style= 'whitegrid')
-sns.displot(x='Sales Ratio', y='Sale Amount',data= df)
+# Lineplot with dark
+sns.set_theme(style= 'dark')
+sns.lmplot(x='Sales Ratio', y='Sale Amount',data= df)
 plt.show()
 
-sns.heatmap(x='Sales Ratio', y='Sale Amount',data= df)
+# Lineplot with white
+sns.set_theme(style= 'white')
+sns.lmplot(x='Sales Ratio', y='Sale Amount',data= df)
 plt.show()
+
+# Lineplot with ticks
+sns.set_theme(style= 'ticks')
+sns.lmplot(x='Sales Ratio', y='Sale Amount',data= df)
+plt.show()
+
 
 
 
