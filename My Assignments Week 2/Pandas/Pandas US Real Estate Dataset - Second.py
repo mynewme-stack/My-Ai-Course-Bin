@@ -1,34 +1,53 @@
 import pandas as pd
-p = pd.read_csv('Real_Estate_Sales_2001-2022_GL-Short.csv', delimiter=',',parse_dates=['Date Recorded'], date_format={'date_added': '%m/%d/%Y'} )
-fill = {}                                #Empty dictionary 
-for i in p.columns:                      # loop goes through every column name
-    if p[i].dtype != 'object':             # If data type of a value not a string
-        fill[i] = 0                     # instead of giving Nan give it 0
-    else:                                   
-        fill[i] = 'N/A'                 # if string than nan written
-p = p.fillna(value=fill)            # fill values with dictionary
-print('File review:\n', p.to_string())            # all values 
-print("Data type of file: ",p.dtypes)
-print('Information: ',p.info)
-print('only first 3: ',p.head(3))
-print('last 2: ',p.tail(2))
-print('statistics: ',p.describe())
-print('shape: ', p.shape)
+p = pd.read_csv('Datasets/Real_Estate_Sales_2001-2022_GL-Short.csv', delimiter=',',parse_dates=['Date Recorded'], date_format={'date_added': '%m/%d/%Y'} )
+
+# Removing Nan 
+
+fill = {i: (0 if p[i].dtype != 'object' else 'N/A') for i in p.columns} # If data type = int, float than 0 else String than also 0  
+p = p.fillna(value=fill)                                          
+
+# Displaying 
+
+print('\nFile Review:\n', p.to_string())            # all values 
+print("\nData Type of File:\n",p.dtypes)
+print('\nInformation:\n',p.info)
+
+print('\nOnly First Three Rows:\n',p.head(3))
+print('\nLast Two Rows:\n',p.tail(2))
+print('\nStatistics:\n',p.describe())
+
+print('\nShape:\t', p.shape)
+
+# Accessing Specific Columns
+
 column1 = p['Serial Number']
-print('Serial: ', column1.to_string())
+print('Serial:\n', column1.to_string())
+
+# Two Columns
+
 column_2_3 = p[['List Year','Date Recorded']]
-print('Column list year and date: ', column_2_3)
-# only index used to show 
+print('Column List Year and Date:\n\n', column_2_3)
+
+# Only index used to show columns 
+
 column_4 = p.loc[4]
-print('column 4: ', column_4)
+print('Column 4:\n', column_4)
+
+# Multiple columns with just index
+
 column_5_6 = p.loc[[5,6]]
-print('Column 5 and 6',column_5_6)
-# slice of rows
+print('Fifth and Sixth Row:\n',column_5_6.to_string())
+
+# Slice of rows while using index
+
 slice_row = p.loc[0:4]
-print('Rows 1 to 4: ', slice_row)
+print('First Five Rows:\n', slice_row.to_string())
+
 # slice with condtions 
+
 residential = p.loc[p['Property Type'] == 'Residential']
 print('Only residentials are:\n',residential.to_string())
+
 # only one column
 only_column = p.loc[:,'Serial Number']
 print('only serial numbers',only_column)
