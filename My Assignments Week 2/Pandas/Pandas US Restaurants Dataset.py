@@ -7,7 +7,7 @@ print(f'File: {p}')
 
 print('File Review:\n', p.to_string())            # all values 
 print("Data Type of File:\n",p.dtypes)
-print('Information:\n',p.info)
+p.info()
 print('Only First Three Rows:\n',p.head(3))
 print('Last Two Rows:\n',p.tail(2))
 print('Some Statistics Functions Applied:\n',p.describe())
@@ -59,41 +59,103 @@ print("First Seven Rows with city,country,keys,latitude and longitude:\n", date_
 property_type = p.loc[p['name'] == 'McDonald\'s','latitude':'longitude']
 print("Only McDonald\'s:\n ",property_type)
 
-# New 
+# New indexing 
 
-p_new = pd.read_csv('Real_Estate_Sales_2001-2022_GL-Short.csv',index_col = 'Sale Amount')
+p_new = pd.read_csv('Datasets/FastFoodRestaurants.csv', index_col = 'keys')
+
+# No nan problems
+
 fill = {col: (0 if p_new[col].dtype != 'object' else 'N/A') for col in p_new.columns}
-p_new=p_new.fillna(value=fill)
+p_new = p_new.fillna(value=fill)
+
 print('Only:\n',p_new)
-fifth_row = p_new.loc[248400.00]
-print('fifth: ',fifth_row)
-#slice
-nowslice = p_new.loc[248400.00:775000.00]
-print(nowslice)
-# i loc
+fifth_row = p_new.loc['us/ny/massena/6098statehighway37/-1161002137']
+print('Fifth: ',fifth_row)
+
+# Slicing
+
+nowslice = p_new.loc['us/ny/massena/6098statehighway37/-1161002137':'us/sc/batesburg/205wchurchst/-791445730']
+print(f'Fifth to Fifteenth Row:\n{nowslice}')
+
+# Now using .iloc
+
 two = p_new.iloc[2]
-print('Now with index:\n',two)
+print('Now with index two:\n',two)
+# Multiple
 two_three = p_new.iloc[[0,3]]
-print('Only two',two_three)
-my_selection = p_new.iloc[0:2,0:2]
-print('selected square:\n',my_selection)
+print('Only First Three Rows',two_three)
+
+# Rows and column both specified 
+
+my_selection = p_new.iloc[0:2,0:1]
+print('Selected Square of data frame:\n',my_selection)
 print(my_selection.shape)
+
+# Adding Row
+
 print(p.columns.tolist())
-p.loc[len(p.index)] = [2020177,2020,'04/14/2021','Ansonia','323 BEAVER ST',133000.00,248400.00,0.5354,'Residential','Single Family',None,None,None,'POINT (-73.06822 41.3504)']
-print('addition: ',p.tail(1))
-# removing
+p.loc[len(p.index)] = ['139 Columbus Rd',"Athens","US","us/oh/athens/139columbuseffg/990890980",39.3324444,-82.097324,"OMG!! Rotisserie",4570431,'OH',"http://www.omgrotisserie.com,http://omgrotisserie.com"]
+print('Addition of a row: ',p.tail(1))
+
+# Removing row
+
 p.drop(142, axis=0,inplace=True)
-print('After removal:\n',p.tail(1))
-p.drop(['OPM remarks','Location'], axis=1,inplace=True)
+print('After Removal:\n',p.tail(1))
+
+# Removing columns
+
+p.drop(['websites','postalCode'], axis=1,inplace=True)
 print(p.columns.tolist())
-p.rename(columns={'Serial Number': 'serial Number'}, inplace=True)
-p.rename(mapper={'List Year': 'list year','Date Recorded':'date recorded'},axis= 1, inplace=True)
-print("after few changes:\n",p)
-# rename rows
-p.rename(index={0:1},inplace=True)
-p.rename(mapper={1:2,3:1,2:1000000000},axis=0,inplace=True)
-print("after few changes:\n",p)
-# selecting row with condition
-select_row = p.query('`Sale Amount` < 50000')
+p.rename(columns={'country': 'Country'}, inplace=True)
+p.rename(mapper={'province': 'Province','city':'City'},axis= 1, inplace=True)
+print("Changed column names:\n",p)
+
+# Rename rows
+
+p.rename(index={0:10},inplace=True)
+p.rename(mapper={1:20,2:30,3:40},axis=0,inplace=True)
+print("Rows index Changed:\n",p)
+
+# Selecting row with condition
+
+select_row = p.query('latitude < 100')
 print(select_row.to_string())
 print(len(select_row))
+
+# Display data
+
+pd.set_option('display.max_rows', None)
+pd.set_option('display.max_columns', None)
+print('Final Data:\n',p)
+
+# Sorting by key address
+
+sort_add = p.sort_values(by='address')
+print('Sorting by Address:\n',sort_add.to_string(index=False))
+
+# Sorting columns 
+
+sort_1 = p.sort_values(by =['latitude','longitude'])
+print('Sorting by Latitude and Longitude:\n',sort_1.to_string(index=False))
+
+# using groupby
+
+grouped = p.groupby('longitude')['latitude'].sum()
+print(grouped.to_string())
+print('Grouping:\n',len(grouped))
+
+# Cleaning 
+
+p_clean = p.dropna()
+print(p_clean)
+
+# Data list
+
+lists = [6,8,9,10]
+array1 = pd.array(lists)
+print(array1)
+
+# Now with data type
+
+array2 = pd.array([1.56645454,2.55,7676.23,4.76],dtype='float')
+print(array2)
