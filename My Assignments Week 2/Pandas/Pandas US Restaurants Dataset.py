@@ -1,41 +1,66 @@
 import pandas as pd
-p = pd.read_csv('FastFoodRestaurants.csv', delimiter=',')
-print(p)
-print('File review:\n', p.to_string())            # all values 
-print("Data type of file: ",p.dtypes)
-print('Information: ',p.info)
-print('Only first Three Rows: ',p.head(3))
-print('Last Two Rows: ',p.tail(2))
-print('Some Statistics Functions Applied: ',p.describe())
-print('Shape of Datset: ', p.shape)
+p = pd.read_csv('Datasets/FastFoodRestaurants.csv', delimiter=',')
+
+# Displaying 
+
+print(f'File: {p}')
+
+print('File Review:\n', p.to_string())            # all values 
+print("Data Type of File:\n",p.dtypes)
+print('Information:\n',p.info)
+print('Only First Three Rows:\n',p.head(3))
+print('Last Two Rows:\n',p.tail(2))
+print('Some Statistics Functions Applied:\n',p.describe())
+print('Shape of Datset:\n', p.shape)
+
+# Access Column with name
+
 column1 = p['address']
 print('Address: ', column1.to_string())
+# Multiple columns
 column_2_3 = p[['city','country']]
 print('City and Country: ', column_2_3)
-# only index used to show 
+
+# Only index used to show 
+
 column_4 = p.loc[4]
 print('Column 4: ', column_4)
+# Multiple
 column_5_6 = p.loc[[5,6]]
 print('Column 5 and 6',column_5_6)
-# slice of rows
+
+# Slice of rows
+
 slice_row = p.loc[0:4]
 print('Rows 1 to 4: ', slice_row)
-# slice with condtions 
-residential = p.loc[p['name'] == 'McDonald\'s']
-print('Only residentials are:\n',residential.to_string())
-# only one column
-only_column = p.loc[:,'Serial Number']
-print('only serial numbers',only_column)
-#multi
-multi_column = p.loc[:,'Serial Number':'List Year']
-print("only 2 columns",multi_column)
-# slice of columns
-date_year = p.loc[:5,'List Year':'Date Recorded']
-print("First five dates and years:\n", date_year)
-# more than one with a condtion
-property_type = p.loc[p['Property Type']=='Commercial','Serial Number':'List Year']
-print("Commercial:\n ",property_type)
+
+# Slice with condtions 
+
+restaurant = p.loc[p['name'] == 'McDonald\'s']
+print('Only Residentials are:\n',restaurant.to_string())
+
+# Only one column
+
+only_column = p.loc[:,'address']
+print('Only Address:\n',only_column)
+
+# Multiple columns
+
+multi_column = p.loc[:,'city':'country']
+print("Only Two Columns:\n",multi_column)
+
+# Slice of rows and columns
+
+date_year = p.loc[:6,'city':'longitude']
+print("First Seven Rows with city,country,keys,latitude and longitude:\n", date_year)
+
+# Conditioning with slicing
+
+property_type = p.loc[p['name'] == 'McDonald\'s','latitude':'longitude']
+print("Only McDonald\'s:\n ",property_type)
+
 # New 
+
 p_new = pd.read_csv('Real_Estate_Sales_2001-2022_GL-Short.csv',index_col = 'Sale Amount')
 fill = {col: (0 if p_new[col].dtype != 'object' else 'N/A') for col in p_new.columns}
 p_new=p_new.fillna(value=fill)
