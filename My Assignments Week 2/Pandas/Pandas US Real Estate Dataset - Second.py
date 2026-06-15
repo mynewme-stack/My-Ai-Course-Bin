@@ -101,10 +101,6 @@ my_selection = p_new.iloc[0:2,0:1]
 print(f'Selected Square:\n{my_selection}')
 print(my_selection.shape)
 
-# Conversion of Series in list 
-
-print(p_new.tolist())
-
 # Addition of a row
 
 p.loc[len(p.index)] = [2020177,2020,'04/14/2021','Ansonia','323 BEAVER ST',133000.00,248400.00,0.5354,'Residential','Single Family',None,None,None,'POINT (-73.06822 41.3504)']
@@ -130,7 +126,7 @@ print("after few changes:\n",p)
 
 p.rename(index={0:1},inplace=True)
 p.rename(mapper={1:2,2:3,3:4},axis=0,inplace=True)
-print(p.rows.to_list())
+print(p.index.to_list())
 
 print("After few changes:\n",p.to_string())
 
@@ -138,33 +134,48 @@ print("After few changes:\n",p.to_string())
 
 select_row = p.query('`Sale Amount` < 50000')
 print(select_row.to_string())
-print(len(select_row))
+length = len(select_row)
+print(f'The Numbers of Property which prices are lesser than 50k are {length}.')
 
-#
+# All rows and columns
 
 pd.set_option('display.max_rows', None)
 pd.set_option('display.max_columns', None)
-print('final:',p)
-# storing in ascending order
+print('Final Result:\n',p)
+
+# Storing in Ascending order
+
 sorted_p= p.sort_values(by='Sale Amount')
 print(sorted_p.to_string(index=False))
-# sorting columns 
-df1 = p.sort_values(by =['serial Number','Sale Amount'])
-print(df1.to_string(index=False))
-# groupby
+
+# Sorting columns 
+
+column1 = p.sort_values(by =['serial Number','Sale Amount'])
+print(column1.to_string(index=False))
+
+# Grouped 
+
 grouped = p.groupby('Property Type')['Sale Amount'].sum()
 print(grouped.to_string())
 print('grouped:\n',len(grouped))
-# MISSING VALUES
+
+# Missing Values
+
 p_clean = p.dropna()
 print(p_clean)
-# filling nan
+
+# Filling nan
+
 p.fillna(0, inplace= True)
 print(p)
+
 # data list
+
 lists = [1,2,3,4]
 array1 = pd.array(lists)
 print(array1)
+
 # now with data type
+
 array2 = pd.array([2020177],dtype='float')
 print(array2)
