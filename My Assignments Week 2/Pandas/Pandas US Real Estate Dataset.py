@@ -1,31 +1,52 @@
 import pandas as pd
-p = pd.read_csv('RealEstate-USA.csv',delimiter=",")
+p = pd.read_csv('Datasets/RealEstate-USA.csv',delimiter=",")
+
 p.fillna(0, inplace=True)
-print(f'Uploading file:\n{p}')
+print(f'Uploading File:\n{p}')
+
 # Data type 
-print("Data type of file:\n",p.dtypes)
-# Info
+
+print("Data Type of File:\n",p.dtypes)
+
+# Information
+
 p.info()
+
 # Displaying any part of rows
-print("First four rows\n",p.head(4))
-print("Last five rows\n", p.tail(5))
-# Desciribe to describe stats
+
+print("First Four Rows\n",p.head(4))
+print("Last Five Rows\n", p.tail(5))
+
+# Using describe() to show statistics
+
 print("Summary of Statistics:\n",p.describe())
-# shape
-print("Shape of file:\n",p.shape)
-# printing one column
+
+# Shape
+
+print("Shape of File:\n",p.shape)
+
+# Printing only one column
+
 status = p['status']
-print("Only status of real us estates:\n",status)
-# multiple columns
+print("Only Status of RealEstate USA :\n",status)
+
+# Multiple columns
+
 status_price = p[["status","price"]]
-print("Status and price:\n",status_price)
+print("Status and Price:\n",status_price)
+
 # Now only i row
+
 second = p.loc[2]
-print("Selecting second row:\n",second)
-# Multi rows
+print("Selecting Second Row:\n",second)
+
+# Multiple rows
+
 third_fourth = p.loc[[3,4]]
-print("Selecting third and fourth rows:\n",third_fourth)
-# slice of rows better way
+print("Selecting Third and Fourth rows:\n",third_fourth)
+
+# Slice of rows 
+
 slice_row = p.loc[0:4]
 print("Row sliced from 0 to 4:\n", slice_row)
 # conditional

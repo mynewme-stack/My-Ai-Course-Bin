@@ -1,5 +1,5 @@
 import pandas as pd
-p = pd.read_csv('Datasets/Real_Estate_Sales_2001-2022_GL-Short.csv', delimiter=',',parse_dates=['Date Recorded'], date_format={'date_added': '%m/%d/%Y'} )
+p = pd.read_csv('Datasets/Real_Estate_Sales_2001-2022_GL-Short.csv', delimiter=',',parse_dates=['Date Recorded'], date_format= '%m/%d/%Y')
 
 # Removing Nan 
 
@@ -8,9 +8,9 @@ p = p.fillna(value=fill)
 
 # Displaying 
 
-print(f'\nFile Review:\n{p.to_string()}')            # all values 
+print(f'\nFile Review:\n{p.to_string()}')            # All values 
 print(f'\nData Type of File:\n{p.dtypes}')
-print(f'\nInformation:\n{p.info}')
+p.info()
 
 print('\nOnly First Three Rows:\n',p.head(3))
 print('\nLast Two Rows:\n',p.tail(2))
@@ -82,7 +82,7 @@ print('\nFifth Row:\n',fifth_row)
 
 # Slicing
 
-nowslice = p_new.loc[200500:20058]
+nowslice = p_new.loc[200500:20058]      
 print(f'\nSlice of Fifth to Seventh Rows:\n{nowslice}')
 
 # Using i.loc
@@ -103,13 +103,14 @@ print(my_selection.shape)
 
 # Addition of a row
 
-p.loc[len(p.index)] = [2020177,2020,'04/14/2021','Ansonia','323 BEAVER ST',133000.00,248400.00,0.5354,'Residential','Single Family',None,None,None,'POINT (-73.06822 41.3504)']
+p.loc[len(p.index)] = [2020177,2020,'04/14/2021','Ansonia','323 BEAVER ST',133000.00,248400.00,0.5354,'Residential','Single Family','N/A','N/A','N/A','POINT (-73.06822 41.3504)']
 print('Addition of one row:\n',p.tail(1))
 
 # Removing a row 
 
-p.drop(142, axis=0,inplace=True)
-print('After Removal:\n',p.tail(1))
+if 142 in p.index:
+    p.drop(142, axis=0,inplace=True)
+    print('After Removal:\n',p.tail(1))
 
 # Removing columns
 
