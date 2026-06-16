@@ -80,12 +80,27 @@ plt.show()
 
 # 5.                                     REPLOT
 
+new_dfff = df.sort_values(by='Date Recorded')
 sns.set_theme(style='ticks', rc = {'axes.facecolor': 'white'})
-sns.relplot(x= 'Sales Ratio' )
+sns.relplot(x= 'Date Recorded', y='Sales Ratio',hue='List Year', data= new_df, kind='line')
+plt.xticks(rotation=45) 
+plt.tight_layout()
+plt.show()
 
+# 6.                                    CATPLOT
 
+sns.set_theme(style='darkgrid')
+sns.catplot(x='Property Type', y='Sales Ratio',hue='List Year', kind='bar', data= new_df,height=6)
+plt.tight_layout()
+plt.xticks(rotation= 10)
+plt.show()
 
+# 7.                                    BOXPLOT                             
 
+sns.set_theme(style='darkgrid')
+sns.boxplot(x='Property Type', y='Sales Ratio',hue='List Year', data= new_df)
+plt.tight_layout()
+plt.show()
 
 
 
