@@ -102,28 +102,34 @@ sns.boxplot(x='Property Type', y='Sales Ratio',hue='List Year', data= new_df)
 plt.tight_layout()
 plt.show()
 
+# 8.                                   VIOLINPLOT
 
+sns.set_theme(style='dark')
+sns.violinplot(x='Property Type', y='Sales Ratio',hue='List Year', data= new_df)
+plt.tight_layout()
+plt.show()
 
+# 9.                                   RELPLOT
 
+sns.set_theme(style='ticks')
+sns.relplot(x='Sale Amount', y='Sales Ratio', data= new_df, color= 'blue')
+plt.tight_layout()
+plt.show()
 
+# 10.                                  JOINPLOT
 
+sns.set_theme(style='ticks')
+sns.jointplot(x='Sale Amount', y='Sales Ratio',kind='hex', data= new_df)
+plt.show()
 
+# 11.                                 HISTPLOT
 
+sns.set_theme(style='ticks')
+sns.histplot(x = 'Sales Ratio', data= df,multiple='stack', hue= 'Residential Type')   
+plt.show()
 
+# 12.                                  BOXPLOT                               
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+sns.set_theme(style='ticks')
+sns.boxplot(x = 'Sales Ratio', data= df, hue= 'Residential Type')
+plt.show()
