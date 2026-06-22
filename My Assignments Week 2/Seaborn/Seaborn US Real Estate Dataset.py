@@ -10,11 +10,11 @@ print(f'Data frame:\n{df}')
 
 df_melt = df[['price','house_size','bed','bath','status']].melt(id_vars='status', var_name= 'measurement', value_name='value')
 
-# 13.                                 STRIPPLOT
+# 13.                                  STRIPPLOT
 
 sns.set_theme(style='whitegrid')
 fig, ax = plt.subplots(figsize=(13,7))
-sns.stripplot(x= 'value', y= 'measurement', hue= 'province', data=df_melt,jitter=True,dodge= True,ax= ax)
+sns.stripplot(x= 'value', y= 'measurement', hue= 'status', palette='Set2', size=4, alpha=0.7 , data=df_melt,jitter=True,dodge= True,ax= ax)
 ax.set_xscale('log')
 plt.tight_layout()
 plt.title('Status VS Price')
@@ -49,7 +49,7 @@ plt.show()
 # 17.                                 BOXENPLOT
 
 sns.set_theme(style='whitegrid')
-sns.boxenplot(x= 'brokered_by', y ='street', color='b', data=df)
+sns.boxenplot(x='status', y='price', palette='Set2', color='b', data=df)
 plt.show()
 
 # 18.                                SCATTERPLOT
@@ -66,8 +66,9 @@ plt.show()
 
 # 20.                               FACETGRID
 
-g= sns.FacetGrid(data=df, col= 'city', col_wrap=4, height=2)
-g.map_dataframe(sns.scatterplot, x= 'price', y= 'house_size', hue='status', s=15)
+df_less = df.head(30)
+g= sns.FacetGrid(data=df_less, col= 'city', col_wrap=4, height=2)
+g.map_dataframe(sns.scatterplot, x= 'price', y= 'house_size', hue='status', s=15, annot=True, fmt='.2f', cmap='coolwarm', center=0, linewidths=0.5)
 g.set_axis_labels('Price','House Size')
 g.add_legend()
 plt.show()
@@ -80,7 +81,7 @@ plt.show()
 
 # 22.                              JOINGRID
 
-mine = sns.jointplot(data=df, x = 'price', y= 'house_size')
+mine = sns.jointplot(data=df, x = 'price', y= 'house_size', kind='kde')
 mine.plot(sns.scatterplot, sns.histplot)
 plt.show()
 

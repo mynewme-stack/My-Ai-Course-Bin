@@ -1,7 +1,7 @@
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
-import seaborn as sns
+import seaborn as sns 
 
 df = pd.read_csv('Datasets/FastFoodRestaurants.csv', delimiter=',')
 df = df.fillna('N/A')
@@ -56,25 +56,20 @@ plt.show()
 fig, axes = plt.subplots(1,2,figsize = (12,4))
 df_few = df.sample(20, random_state=1)
 sns.set_theme(style='ticks', rc= {'axes.facecolor':'white', 'grid.color': 'grey'})
-sns.barplot(data=df_few, x = 'city', y= 'longitude',ax=axes[0])
+sns.barplot(data=df_few, x = 'city', y= 'longitude', hue='country',ax=axes[0])
 plt.tight_layout()
 plt.show()                
 input('Enter Spacebar for Further Execution:')
 
 # 31.                                   KDEPLOT
 
-for c in cols:
-    if c != 'latitude':
-                sns.kdeplot(data = df_few,
-                x = c, y = 'latitude',
-                fill='True',
-                cmap= 'Blues')
-    plt.title(f'{c} VS Longitude')
-    plt.show()
+sns.kdeplot(x='longitude', y='latitude', fill=True, cmap='Blues')
+plt.title('Latitude VS Longitude')
+plt.show()
 
 # 32.                                   BARPLOT
 
-df_few = df.sample(10, random_state=1)
+df_few = df.sample(40, random_state=1)
 sns.kdeplot(data=df_better, x="longitude", y="latitude", fill=True, cmap="Blues")
 plt.title("Longitude vs Latitude")
 plt.show()
@@ -91,7 +86,7 @@ sns.catplot(
         data=df_small,
         x='province',
         y= 'latitude',hue='country',
-        kind='point',join = True, 
+        kind='bar', 
         palette='Set2', height=5, aspect=1.2
 )
 plt.tight_layout()
