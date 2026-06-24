@@ -6,7 +6,7 @@ URL = "https://www.ebay.com/b/Cell-Phones-Smartphones/9355/bn_320094"
 a = requests.get(URL)
 
 soup = BeautifulSoup(a.content, 'html5lib')
-
+ 
 phones = []
 
 table = soup.find('ul',attrs={'class':"brwrvr_item-results brwrvr_item-results--list"})
