@@ -11,15 +11,15 @@ driver = webdriver.Chrome(service=service)
 driver.get(URL)
 
 phoneList=[]
-phonesDiv = driver.find_elements(By.XPATH,"//ul[contains(@class,'text- center')]")
+phonesDiv = driver.find_elements(By.XPATH,"//li[contains(@class,'brwrvr__item-card')]")
 for p in range(len(phonesDiv) -1):
     phone = {}
-    phone['img'] = phonesDiv[p+1].find_element(By.TAG_NAME,'img')
+    phone['img'] = phonesDiv[p+1].find_element(By.TAG_NAME,'img').get_attribute('src')
     phoneList.append(phone)
-file_name = 'Web_Scraped/cellphones_smartphones_ebay.csv' 
+file_name = 'Web_Scraped/selenium_cellphones_smartphones_ebay.csv' 
 with open (file_name, 'w', newline='') as f:
-    w= csv.DictWriter(f,['image'])
+    w= csv.DictWriter(f,['img'])
     w.writeheader()
     for phone in phoneList:
-        w.writeheader(phone)
+        w.writerow(phone)
 driver.close()

@@ -15,7 +15,7 @@ for p in range(len(phone_div)-1):
     phone = {}
     phone ['img'] = phone_div[p+1].find_element(By.TAG_NAME, 'img')
     phone_list.append(phone)
-file_n = 'Web_Scraped/cellphones_smartphones_ebay.csv' 
+file_n = 'Web_Scraped/selenium_cellphones_smartphones_ebay.csv' 
 with open (file_n, 'w', newline='') as f:
     w = csv.DictWriter(f,['image'])
     w.writeheader()
