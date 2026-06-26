@@ -2,23 +2,23 @@ import requests
 from bs4 import BeautifulSoup
 import csv
 
-URL = "https://www.daraz.pk/catalog/?spm=a2a0e.tm80331704.cate_5.5.77cc5aa7fPImi7&q=Smart%20Phones&from=hp_categories&src=all_channel"
-r = requests.get(URL)
 
-soup = BeautifulSoup(r.content, 'html5lib')
+with open('C:\\Users\\DELL\\OneDrive\\Documents\\GitHub\\My-Ai-Course-Bin\\My Assignments Week 2\\Website\\Daraz.pk.html', 'r', encoding='utf-8') as file:
+    soup = BeautifulSoup(file, 'html5lib')
 
 phones = []
 
-table = soup.find('', attrs={'':''})
+table = soup.find('div', attrs={'id':'root'})
 
-for row in table.find_all('', attrs={'':''}):
+for row in table.find_all('div', attrs={'class':'Bm3ON'}):
     phone = {}
-    phone['title'] = row.find()
+    phone['title'] = row.find('div', attrs= {'class':'RfADt'}).text
+    phone['price'] = row.find('div', attrs={'class':'aBrP0'}).text
     phones.append(phone)
 
 filename = 'Web_Scraped/cellphones_smartphones_Daraz.csv'
-with open (filename, 'w', newline='') as f:
-    w= csv.DictWriter(f, ['title'])
+with open (filename, 'w', newline='', encoding='utf-8-sig') as f:
+    w= csv.DictWriter(f, ['title','price'])
     w.writeheader()
     for phone in phones:
-        w.writeheader(phone)
+        w.writerow(phone)

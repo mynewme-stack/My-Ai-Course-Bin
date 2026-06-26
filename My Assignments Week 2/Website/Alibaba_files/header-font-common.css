@@ -1,0 +1,49 @@
+* {
+  font-family: 'Alibaba_B2B_Sans', Inter, 'SF Pro Text', Roboto, 'Helvetica Neue', Helvetica, Tahoma,
+    Arial, 'PingFang SC', 'Microsoft YaHei';
+}
+
+@font-face {
+  font-family: 'Alibaba_B2B_Sans';
+  src: url('https://s.alicdn.com/@common/font/Alibaba_B2B_Sans_Regular.woff2') format('woff2'),
+    url('https://s.alicdn.com/@common/font/Alibaba_B2B_Sans_Regular.woff') format('woff'),
+    url('https://s.alicdn.com/@common/font/Alibaba_B2B_Sans_Regular.ttf') format('truetype'),
+    url('https://s.alicdn.com/@common/font/Alibaba_B2B_Sans_Regular.otf') format('opentype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Alibaba_B2B_Sans';
+  src: url('https://s.alicdn.com/@common/font/Alibaba_B2B_Sans_SemiBold.woff2') format('woff2'),
+    url('https://s.alicdn.com/@common/font/Alibaba_B2B_Sans_SemiBold.woff') format('woff'),
+    url('https://s.alicdn.com/@common/font/Alibaba_B2B_Sans_SemiBold.ttf') format('truetype'),
+    url('https://s.alicdn.com/@common/font/Alibaba_B2B_Sans_SemiBold.otf') format('opentype');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Alibaba_B2B_Sans';
+  src: url('https://s.alicdn.com/@common/font/Alibaba_B2B_Sans_SemiBold.woff2') format('woff2'),
+    url('https://s.alicdn.com/@common/font/Alibaba_B2B_Sans_SemiBold.woff') format('woff'),
+    url('https://s.alicdn.com/@common/font/Alibaba_B2B_Sans_SemiBold.ttf') format('truetype'),
+    url('https://s.alicdn.com/@common/font/Alibaba_B2B_Sans_SemiBold.otf') format('opentype');
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Alibaba_B2B_Sans';
+  src: url('https://s.alicdn.com/@common/font/Alibaba_B2B_Sans_Bold.woff2') format('woff2'),
+    url('https://s.alicdn.com/@common/font/Alibaba_B2B_Sans_Bold.woff') format('woff'),
+    url('https://s.alicdn.com/@common/font/Alibaba_B2B_Sans_Bold.ttf') format('truetype'),
+    url('https://s.alicdn.com/@common/font/Alibaba_B2B_Sans_Bold.otf') format('opentype');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+html {
+  -webkit-font-smoothing: antialiased;
+}

@@ -1,0 +1,274 @@
+.input-zip-code {
+  inline-size: 342px;
+  height: 38px;
+  border: 1px solid #c3c6cf;
+  padding: 0;
+  border-radius: 4px;
+  padding: 0 12px;
+  box-sizing: border-box;
+}
+
+.input-invalid-text {
+  display: inline-block;
+  color: #b3261e;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 16px;
+  margin-top: 8px;
+}
+
+.input-zip-code::placeholder {
+  color: #767676;
+  font-style: normal;
+}
+
+.crated-header-ship-to *,
+.crated-header-ship-to-trigger * {
+  box-sizing: border-box;
+  font-size: 14px;
+}
+
+.crated-header-ship-to-trigger {
+  position: relative;
+  display: inline-block;
+  cursor: default;
+}
+
+.crated-header-ship-to-country-item {
+  display: flex;
+  align-items: center;
+  height: 36px;
+  padding: 12px;
+  cursor: pointer;
+}
+
+.crated-header-ship-to-country-item:hover {
+  background: #eee;
+}
+
+.crated-header-ship-to-country-item i {
+  margin-inline-end: 4px;
+}
+
+.crated-header-ship-to {
+  background: #fff;
+  padding: 20px;
+  inline-size: 380px;
+  max-height: calc(100vh - 100px);
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+.crated-header-ship-to .crated-header-ship-to-title {
+  color: rgb(51, 51, 51);
+  font-size: 16px;
+  line-height: 24px;
+  margin-bottom: 4px;
+}
+
+.crated-header-ship-to .crated-header-ship-to-desc {
+  margin-top: 8px;
+  color: rgb(51, 51, 51);
+  font-size: 14px;
+  line-height: 22px;
+  margin-bottom: 20px;
+}
+
+.crated-header-ship-to .crated-header-ship-to-sign-in {
+  inline-size: 100%;
+  background-color: #ff6a00;
+  border: none;
+  border-radius: 9999px;
+  display: block;
+  text-align: center;
+  margin-top: 6px;
+  line-height: 36px;
+  height: 36px;
+  cursor: pointer;
+  color: #fff !important;
+  outline: none;
+  font-size: 14px;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.crated-header-ship-to .address-item-container {
+  margin-bottom: 8px;
+}
+
+.crated-header-ship-to .ship-to-invalid-span {
+  display: flex;
+  color: #b3261e;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 16px;
+  margin-top: 8px;
+}
+
+.crated-header-ship-to .ship-to-invalid-span > img {
+  height: 16px;
+  inline-size: 16px;
+  margin-inline-end: 2px;
+}
+
+.crated-header-ship-to .crated-header-ship-to-item {
+  color: #333;
+  border: 1px solid #e6e7eb;
+  cursor: pointer;
+  padding: 8px 12px;
+  font-size: 14px;
+  line-height: 22px;
+  border-radius: 4px;
+}
+
+.crated-header-ship-to .crated-header-ship-to-item b {
+  margin-inline-end: 2px;
+}
+
+.crated-header-ship-to .crated-header-ship-to-item .crated-header-ship-to-item-default-mb {
+  display: none;
+}
+
+.crated-header-ship-to .crated-header-ship-to-item .crated-header-ship-to-item-default-mb {
+  margin-bottom: 8px;
+}
+
+.crated-header-ship-to .crated-header-ship-to-item.current {
+  border: 1px solid #ff6a00;
+}
+
+.crated-header-ship-to .crated-header-ship-to-item.current .crated-header-ship-to-item-default-mb {
+  display: block;
+}
+
+.crated-header-ship-to .crated-header-ship-to-item .crated-header-ship-to-item-default {
+  display: inline-block;
+  margin-top: 12px;
+  color: #ff6600;
+  font-size: 12px;
+  background: #fff1e8;
+  padding: 0px 2px;
+  border-radius: 4px;
+  line-height: 24px;
+}
+
+.crated-header-ship-to .crated-header-ship-to-action-container {
+  margin-top: 16px;
+}
+
+.crated-header-ship-to .crated-header-ship-to-action-container .crated-header-ship-to-separator {
+  position: relative;
+  top: -0.06em;
+  display: inline-block;
+  inline-size: 1px;
+  background: #d8d8d8;
+  height: 0.9em;
+  margin: 0 8px;
+  vertical-align: middle;
+}
+
+.crated-header-ship-to .crated-header-ship-to-action-container .crated-header-ship-to-action {
+  border-radius: 0;
+  padding: 0;
+  height: 20px;
+  font-size: 14px;
+  border-width: 0;
+  color: #222;
+  background: none;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  line-height: 18px;
+  text-decoration-line: underline !important;
+}
+
+.crated-header-ship-to .crated-header-ship-to-dash-wrapper {
+  margin: 24px 0;
+  position: relative;
+}
+
+.crated-header-ship-to .crated-header-ship-to-dash-wrapper .crated-header-ship-to-dash-line {
+  border-top: 1px solid #dddddd;
+}
+
+.crated-header-ship-to .crated-header-ship-to-dash-wrapper .crated-header-ship-to-dash-line-text-wrapper {
+  top: -9px;
+  inline-size: 100%;
+  position: absolute;
+  text-align: center;
+}
+
+.crated-header-ship-to .crated-header-ship-to-dash-wrapper .crated-header-ship-to-dash-line-text-wrapper .crated-header-ship-to-dash-line-text {
+  color: #767676;
+  display: inline-block;
+  padding: 2px 12px;
+  font-size: 12px;
+  background: #fff;
+}
+
+.crated-header-ship-to .ship-to-country {
+  inline-size: 342px;
+  height: 29px;
+  box-sizing: border-box;
+}
+
+.crated-header-ship-to .ship-to-country.invalid-country .css-13cymwt-control {
+  border-color: #b3261e;
+}
+
+.crated-header-ship-to .ship-to-country-item {
+  height: 36px;
+  padding: 12px;
+  cursor: pointer;
+}
+
+.crated-header-ship-to .ship-to-country-item:hover {
+  background: #eee;
+}
+
+.crated-header-ship-to .ship-to-zip {
+  margin-top: 19px;
+  margin-bottom: 16px;
+}
+
+.crated-header-ship-to .crated-header-ship-to-no-data-container,
+.crated-header-ship-to .crated-header-ship-to-action-main {
+  text-align: center;
+}
+
+.crated-header-ship-to .crated-header-ship-to-no-data-container .crated-header-ship-to-action-btn,
+.crated-header-ship-to .crated-header-ship-to-no-data-container button,
+.crated-header-ship-to .crated-header-ship-to-action-main .crated-header-ship-to-action-btn,
+.crated-header-ship-to .crated-header-ship-to-action-main button {
+  min-inline-size: 98px;
+  inline-size: 160px;
+  background-color: #ff6a00;
+  border: none;
+  border-radius: 2px;
+  text-align: center;
+  margin-top: 6px;
+  line-height: 36px;
+  height: 36px;
+  box-sizing: border-box;
+  cursor: pointer;
+  color: #fff !important;
+  border-radius: 9999px;
+  font-size: 14px;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.crated-header-ship-to .crated-header-ship-to-no-data-container button,
+.crated-header-ship-to .crated-header-ship-to-action-main button {
+  inline-size: 100%;
+}
+
+.crated-header-ship-to .crated-header-ship-to-no-data-container .crated-header-ship-to-action-btn,
+.crated-header-ship-to .crated-header-ship-to-action-main .crated-header-ship-to-action-btn {
+  display: block;
+  inline-size: 100%;
+}
+
+.crated-header-ship-to .crated-header-ship-to-no-data-container button {
+  inline-size: 100%;
+}
