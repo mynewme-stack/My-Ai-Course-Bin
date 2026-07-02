@@ -2,23 +2,28 @@ from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.by import By
 import csv
+import undetected_chromedriver as uc 
 
 URL = 'https://www.amazon.com/b?_encoding=UTF8&node=21217035011&ref_=cct_cg_SHnav2_2a1&pf_rd_p=12b44fc7-b592-4f55-b8d7-32c20b211ef1&pf_rd_r=9Z4KFSRNJF7N2MG3RRFC'
 
-service = webdriver.ChromeService(executable_path='C:\\Users\\DELL\\.wdm\\drivers\\chromedriver\\win64\\149.0.7827.155\\chromedriver-win64\\chromedriver.exe')
-driver = webdriver.Chrome(service=service)
-
+service = uc.ChromeOptions()
+service.add_argument(r"--user-data-dir=C:\Users\DELL\AppData\Local\Google\Chrome\ScrapingData")
+service.add_argument("--profile-directory=Default")
+driver = uc.Chrome(options=service, use_subprocess=True, version_main=149)
+driver.implicitly_wait(10)
 driver.get(URL)
 phoneList = []
-phonediv = driver.find_elements(By.XPATH, "//ul[contains(@class, 'text- center')]")
-for p in range(len(phonediv) -1):
+phonediv = driver.find_elements(By.XPATH, "//li[contains(@class, 'octopus-pc-item')]")
+driver.implicitly_wait(10)
+for p in phonediv:
     phone = {}
-    phone['img'] = phonediv[p+1].find_element(By.TAG_NAME,'img')
+    phone['title'] = p.find_element(By.XPATH, ".//a[contains(@class, 'a-link-normal')]//span").text
+    phone['price'] = p.find_element(By.XPATH, ".//span[@class='a-price-whole']").text
+    phone['img'] = p.find_element(By.TAG_NAME, 'img').get_attribute('src')
     phoneList.append(phone)
-file_name = 'Web_Scraped/selenium_cellphones_smartphones_amazon.csv'
-with open (file_name, 'w', newline='') as f:
-    w= csv.DictWriter(f,['image'])
+file_name = 'Web_Scraped/selenium_appliances_amazon.csv'
+with open (file_name, 'w', newline='', encoding='utf-8') as f:
+    w= csv.DictWriter(f,['title','price','img'])
     w.writeheader()
-    for phone in phoneList:
-        w.writeheader(phone)
+    w.writerows(phoneList)
 driver.close()
