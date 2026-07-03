@@ -68,13 +68,6 @@ print("Base 10 Log :", np.log10(latpi))
 longlat_2d= np.array([latitude, longitude])
 print("2D array: ",longlat_2d)
 
-# Information of dimension
-
-print("Dimension of Longitude and Latitude: ",longlat_2d.ndim) 
-print("Size: ", longlat_2d.size)
-print("Shape: ", longlat_2d.shape)
-print("Data Type: ", longlat_2d.dtype)
-
 # Slice
 
 longlat_2d_slice = longlat_2d[1:2 , 2:5]
@@ -95,3 +88,10 @@ for index, i in np.ndenumerate(longlat_2d):             # With index
 
 longlat_2d_re = np.reshape(longlat_2d, (2, -1 ))
 print('Reshaped:\n',longlat_2d_re)
+
+# Information of dimension
+
+print("Dimension of Longitude and Latitude: ",longlat_2d.ndim) 
+print("Size: ", longlat_2d.size)
+print("Shape: ", longlat_2d.shape)
+print("Data Type: ", longlat_2d.dtype)
