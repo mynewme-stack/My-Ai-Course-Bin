@@ -44,6 +44,7 @@ g.map(sns.kdeplot, 'price', fill= True, alpha=0.8, bw_adjust= 0.6)
 g.figure.subplots_adjust(hspace=-0.4)
 g.set(yticks=[],ylabel='',title='')
 g.despine(left=True,bottom=True)
+plt.title('Bedrooms VS Price')
 plt.show()
 
 # 17.                                 BOXENPLOT
@@ -68,7 +69,7 @@ plt.show()
 
 df_less = df.head(30)
 g= sns.FacetGrid(data=df_less, col= 'city', col_wrap=4, height=2)
-g.map_dataframe(sns.scatterplot, x= 'price', y= 'house_size', hue='status', s=15, annot=True, fmt='.2f', cmap='coolwarm', center=0, linewidths=0.5)
+g.map_dataframe(sns.scatterplot, x= 'price', y= 'house_size', hue='status', linewidths=0.5)
 g.set_axis_labels('Price','House Size')
 g.add_legend()
 plt.show()

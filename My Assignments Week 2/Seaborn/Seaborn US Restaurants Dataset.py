@@ -9,7 +9,10 @@ print(df)
 
 # 25.                                DISPLOT
 
-sns.displot(data= df, x = 'longitude', hue= 'country', kind='ecdf', aspect=1.2, palette='Spectral')
+sns.set_theme(style='ticks')                 
+sns.displot(data= df, x = 'longitude', hue= 'country',
+            kind="ecdf", aspect=1, 
+            linewidth=2)
 plt.show()
 
 # 26.                                 LMPLOT
@@ -40,15 +43,17 @@ sns.catplot(
     x="name", y="longitude",
     kind="point", join=True
 )
-
+plt.xticks(rotation=90) 
 plt.show()
 
 # 29.                                PAIRGRID
 
 col = ['city', 'country','province']
 df_small = df.sample(20, random_state=1)
-a = sns.PairGrid(df_small, x_vars= col, y_vars=['longitude'], height=4,aspect=0.7)
+a = sns.PairGrid(df_small, x_vars= col, y_vars=['longitude'], height=4,aspect=1)
 a.map(sns.stripplot, orient= 'h', size= 4, color= 'blue', jitter=True)
+for ax in a.axes.flat:
+    ax.tick_params(axis='x', rotation=90)
 plt.show()
 
 # 30.                                   BARPLOT
@@ -58,12 +63,13 @@ df_few = df.sample(20, random_state=1)
 sns.set_theme(style='ticks', rc= {'axes.facecolor':'white', 'grid.color': 'grey'})
 sns.barplot(data=df_few, x = 'city', y= 'longitude', hue='country',ax=axes[0])
 plt.tight_layout()
+plt.xticks(rotation=90) 
 plt.show()                
 input('Enter Spacebar for Further Execution:')
 
 # 31.                                   KDEPLOT
 
-sns.kdeplot(x='longitude', y='latitude', fill=True, cmap='Blues')
+sns.kdeplot(data=df_better,x='longitude', y='latitude', fill=True, cmap='Blues')
 plt.title('Latitude VS Longitude')
 plt.show()
 
@@ -77,6 +83,7 @@ plt.show()
 sns.barplot(data=df_few, x="city", y="longitude", hue="country", palette="Blues")
 plt.title("City vs Longitude (Grouped by Country)")
 plt.tight_layout()
+plt.xticks(rotation=90) 
 plt.show()
 
 # 33.                                   CATPLOT
@@ -90,6 +97,7 @@ sns.catplot(
         palette='Set2', height=5, aspect=1.2
 )
 plt.tight_layout()
+plt.xticks(rotation=45) 
 plt.show()
 
 # 34.                                   FACETGRID
@@ -98,15 +106,18 @@ g =sns.FacetGrid(data= df_now, col= 'name', col_wrap=3,
               subplot_kws=dict(projection= 'polar'), despine=False)
 g.map(sns.scatterplot, 'longitude', 'latitude')
 plt.tight_layout()
+plt.xticks(rotation=45) 
 plt.show()
 
 # 35.                                 JOINPLOT
 
 t = sns.jointplot(x= 'longitude', y= 'latitude', data= df_better,kind='reg', truncate= False,xlim=(0, 60), ylim=(0,12),color = 'm', height=7)
 plt.tight_layout()
+plt.xticks(rotation=45) 
 plt.show()
 
 # 36.                                RESIDPLOT
 
 sns.residplot(data= df_few,x= 'latitude', y= 'longitude', color= "m")
+plt.xticks(rotation=45) 
 plt.show()

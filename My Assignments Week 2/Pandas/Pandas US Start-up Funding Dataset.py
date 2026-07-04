@@ -104,7 +104,9 @@ p.rename(mapper={'Industry': 'industry','Funding Rounds':'fundingrounds'}, axis=
 # Renaming rows index
 
 p.rename(index={0:10}, inplace=True)
+
 # Multiples
+
 p.rename(index={1:20,2:40,3:60},inplace=True)
 
 # Displaying changes
@@ -132,16 +134,16 @@ print('Sorting by Funding Rounds:\n', sorting)
 sorting2 = p.sort_values(by =['Number of Investors','Growth Rate (%)'])
 print('Sorting by Investors and Growth Rate (%):\n',sorting2.to_string(index=False))
 
+# Cleaning 
+
+p_clean = p.dropna()
+print(p_clean)
+
 # Using groupby
 
 grouped = p.groupby('Number of Investors')['Growth Rate (%)'].sum()
 print(grouped.to_string())
 print('Grouping:\n',len(grouped))
-
-# Cleaning 
-
-p_clean = p.dropna()
-print(p_clean)
 
 # Data list
 

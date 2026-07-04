@@ -142,6 +142,11 @@ grouped = p.groupby('longitude')['latitude'].sum()
 print(grouped.to_string())
 print('Grouping:\n',len(grouped))
 
+# Now with data type
+
+array2 = pd.array([1.56645454,2.55,7676.23,4.76],dtype='float')
+print(array2)
+
 # Cleaning 
 
 p_clean = p.dropna()
@@ -152,8 +157,3 @@ print(p_clean)
 lists = [6,8,9,10]
 array1 = pd.array(lists)
 print(array1)
-
-# Now with data type
-
-array2 = pd.array([1.56645454,2.55,7676.23,4.76],dtype='float')
-print(array2)

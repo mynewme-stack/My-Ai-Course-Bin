@@ -9,9 +9,11 @@ print(f'DataFrame:\n{df}')
 # 1.                                                LINEPLOT
 
 # Data for graph
+
 new_df = df.query('`Sale Amount` < 100000 and `Sales Ratio` < 100')
 
 # Lineplot with darkgrid
+
 sns.set_theme(style='darkgrid')
 sns.lmplot(x = 'Sale Amount', y = 'Sales Ratio',data= new_df, palette='Set1')
 plt.title('Sale Amount VS Sales Ratio')
@@ -19,18 +21,21 @@ plt.tight_layout()
 plt.show()
 
 # Lineplot with whitegrid
+
 sns.set_theme(style='whitegrid')
 sns.lmplot(x = 'Sale Amount', y = 'Sales Ratio', hue='Property Type',data= new_df)
 plt.title('Sale Amount VS Sales Ratio')
 plt.show()
 
 # Lineplot with dark
+
 sns.set_theme(style= 'dark')
 sns.lmplot(x = 'Sale Amount', y = 'Sales Ratio', hue='Property Type',data= new_df)
 plt.title('Sale Amount VS Sales Ratio')
 plt.show()
 
 # Lineplot with white
+
 sns.set_theme(style= 'white')
 sns.lmplot(x = 'Sale Amount', y = 'Sales Ratio', hue='Property Type',data= new_df)
 plt.title('Sale Amount VS Sales Ratio')
@@ -68,6 +73,7 @@ plt.show()
 # 4.                                     DISPLOT
 
 # hist
+
 sns.set_theme(style='ticks', rc= {'axes.facecolor':'white', 'grid.color': 'grey'})                 
 sns.displot(x = 'Sales Ratio', data= new_df, kind='hist')    # For vertical bars                                 
 plt.tight_layout()
@@ -80,10 +86,10 @@ plt.show()
 
 # 5.                                     REPLOT
 
-new_dfff = df.sort_values(by='Date Recorded')
+new_dfff = df.sort_values(by='Sales Ratio')
 sns.set_theme(style='ticks', rc = {'axes.facecolor': 'white'})
-sns.relplot(x= 'Date Recorded', y='Sales Ratio',hue='List Year', data= new_df,col_wrap=3, kind='line')
-plt.xticks(rotation=45) 
+sns.relplot(data= new_dfff, x= 'Sales Ratio', y='Sale Amount',hue='Property Type', kind='line')
+plt.xticks(rotation=90) 
 plt.tight_layout()
 plt.show()
 

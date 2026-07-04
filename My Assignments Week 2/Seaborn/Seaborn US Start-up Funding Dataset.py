@@ -11,7 +11,9 @@ print(df)
 
 df_small = df.head(100)
 sns.set_theme(style='white')
-sns.relplot(data=df_small ,x= 'Startup Name', y= 'Industry', hue='Country', size='Funding Rounds', sizes=(10,500), alpha=.5,palette='muted',height=6)
+sns.relplot(data=df_small ,x= 'Startup Name', y= 'Industry', hue='Country', size='Funding Rounds', 
+            sizes=(10,500), alpha=.5,palette='muted',height=6, aspect=6)
+plt.xticks(rotation=90) 
 plt.show()
 
 # 38.                                              SWARMPLOT
@@ -44,6 +46,7 @@ plt.show()
 
 df_more_small = df.head(30)
 sns.violinplot(data=df_small, x= 'Startup Name', y= 'Industry', orient='y', fill=False)
+plt.xticks(rotation=90) 
 plt.show()
 
 # 42.                                            JOINTGRID
@@ -81,7 +84,7 @@ plt.show()
 
 # 47.                                            RELPLOT
  
-sns.relplot(data=df_small, x= 'Number of Investors',y='Industry', col='Country', kind='line', col_wrap=3, height=2, palette='crest', linewidth=2, ci='sd')
+sns.relplot(data=df_small, x= 'Number of Investors',y='Industry', col='Country', kind='line',hue = 'Country', col_wrap=3, height=2, palette='crest', linewidth=2,errorbar='sd' )
 plt.tight_layout()
 plt.show()
 
