@@ -16,7 +16,7 @@ for p in phonediv:
     phone['price'] = p.find_element(By.XPATH, ".//div[@class='searchx-product-price-price-main']").text
     phone['img'] = p.find_element(By.TAG_NAME, 'img').get_attribute('src')
     phone_l.append(phone)
-file_name = 'Web_Scraped/selenium_cellphones_smartphones_alibaba.csv'
+file_name = 'My Assignments Week 2/Web_Scraped/selenium_cellphones_smartphones_alibaba.csv'
 with open (file_name,'w', newline='', encoding='utf-8') as f:
     w = csv.DictWriter(f, ['title','price','img'])
     w.writeheader()

@@ -18,7 +18,7 @@ for row in table.find_all('div', attrs={'class':'Bm3ON'}):
     phone['url']   = row.a['href']
     phones.append(phone)
 
-filename = 'Web_Scraped/cellphones_smartphones_Daraz.csv'
+filename = 'My Assignments Week 2/Web_Scraped/cellphones_smartphones_Daraz.csv'
 with open (filename, 'w', newline='', encoding='utf-8-sig') as f:
     w= csv.DictWriter(f, ['title','price','img','url'])
     w.writeheader()

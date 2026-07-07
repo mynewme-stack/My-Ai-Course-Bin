@@ -18,7 +18,7 @@ for row in table.find_all('li', attrs={'class': 'brwrvr__item-card'}):
     phone['url']   = row.a['href']
     phones.append(phone)
 
-filename = 'Web_Scraped/cellphones_smartphones_ebay.csv'
+filename = 'My Assignments Week 2/Web_Scraped/cellphones_smartphones_ebay.csv'
 with open(filename, 'w', newline='', encoding='utf-8') as f:
     w = csv.DictWriter(f,['title','img','url','price'])
     w.writeheader()

@@ -25,7 +25,7 @@ for p in phonediv:
     phone['img'] = p.find_element(By.TAG_NAME, 'img').get_attribute('src')
     phoneList.append(phone)
 os.makedirs('Web_Scraped', exist_ok=True)  
-file_name = 'Web_Scraped/selenium_appliances_amazon.csv'
+file_name = 'My Assignments Week 2/Web_Scraped/selenium_appliances_amazon.csv'
 with open (file_name, 'w', newline='', encoding='utf-8') as f:
     w= csv.DictWriter(f,['title','price','img'])
     w.writeheader()
