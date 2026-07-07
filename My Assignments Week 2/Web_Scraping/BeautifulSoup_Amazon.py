@@ -18,6 +18,7 @@ for row in table1.find_all('div', attrs={"class":'_octopus-search-result-card_st
     phones1.append(phone1)
     
 filename = 'My Assignments Week 2/Web_Scraped/smart_appliances_amazon_phones.csv'
+
 with open (filename,'w', newline='', encoding='utf-8-sig') as f:
     w = csv.DictWriter(f,['title','price','img','rate'])
     w.writeheader()
