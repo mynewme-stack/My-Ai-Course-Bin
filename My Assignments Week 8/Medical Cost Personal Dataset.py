@@ -8,7 +8,7 @@ df_use = pd.get_dummies(df, columns=['sex','smoker','region'], drop_first=True)
 
 # check
 print(df_use.columns)
-
+'''
 # studying data
 
 variables = ['age', 'bmi', 'children', 'sex_male','smoker_yes', 'region_northwest', 'region_southeast', 'region_southwest']
@@ -19,6 +19,7 @@ for var in variables:
 
 # data is so wide so i start by using rfr
 
+'''
 from sklearn.ensemble import RandomForestRegressor
 rfr = RandomForestRegressor(n_estimators=210,random_state=15)
 
