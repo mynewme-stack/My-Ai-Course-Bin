@@ -22,7 +22,6 @@ kf = KFold(n_splits=5, shuffle=True, random_state=10)
 # graphs
 column = ['carat', 'depth', 'table', 'x', 'y', 'z', 'cut_Premium', 'color_E', 'clarity_IF']
 
-'''
 for col in column:
     plt.figure()
     sns.scatterplot(data=df, x=col, y="price").set(title=f'General plot of {col}');
@@ -40,10 +39,10 @@ for col in column:
 
 for col in column:
     plt.figure()
-    sns.lineplot(data=df, x=col, y="price").set(title=f'Regression plot of {col}');
+    sns.lineplot(data=df, x=col, y="price").set(title=f'line plot of {col}');
     plt.show()
-'''
 
+    
 # standardsclaer
 from sklearn.preprocessing import StandardScaler
 ss = StandardScaler()
@@ -91,7 +90,7 @@ print('RFR Accuracy mean: ',rfr_score.mean())
 # making csv
 comparison = pd.DataFrame({
     'Actual': y_test,
-    'LR_Predicted':rfr_score_y,
-    'RFR_Predicted':lr_score_y})
+    'LR_Predicted':lr_score_y,
+    'RFR_Predicted':rfr_score_y})
 comparison.to_csv('My Assignments Week 8/Results/Diamonds_result.csv')
 print(comparison)
