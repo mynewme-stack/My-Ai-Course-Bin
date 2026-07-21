@@ -52,7 +52,7 @@ rfr = RandomForestRegressor(max_depth=5, min_samples_leaf=5, random_state=42)
 
 from sklearn.model_selection import train_test_split
 
-x_train, x_test, y_train, y_test = train_test_split(x_scale,Y, random_state=15, shuffle= True)
+x_train, x_test, y_train, y_test = train_test_split(x_scale,Y, train_size=0.9 ,random_state=15, shuffle= True)
 
 # training
 lr.fit(x_train,y_train)

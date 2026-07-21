@@ -55,7 +55,7 @@ lr = LinearRegression()
 
 # Train test
 from sklearn.model_selection import train_test_split
-x_train, x_test, y_train, y_test = train_test_split(x_scale,Y, random_state= 10)
+x_train, x_test, y_train, y_test = train_test_split(x_scale,Y,train_size=0.9, random_state= 10)
 
 # train and predict
 
