@@ -42,9 +42,61 @@ print('unique label : ' , np.unique(y_train))
 x_train = x_train.astype('float32')/255.0
 x_test = x_test.astype('float32')/255.0
 
+x_train = np.expand_dims(x_train, axis=-1)
+x_test = np.expand_dims(x_test, axis=-1)
+'''
 # build nn
 
 model = keras.models.Sequential([
+    keras.layers.Flatten(),
+    keras.layers.Dense(128, activation='relu'),
+    keras.layers.Dropout(0.5),
+    keras.layers.Dense(64, activation= 'relu'),
+    keras.layers.Dropout(0.5),
+    keras.layers.Dense(32, activation='relu'),
+    keras.layers.Dropout(0.2),
+    keras.layers.Dense(10, activation='softmax')
+])
+
+# complie
+
+model.compile(optimizer= 'adam',
+              loss= 'sparse_categorical_crossentropy',
+              metrics= ['accuracy'])
+
+# fit
+
+history = model.fit(x_train,y_train,
+                    epochs = 20,
+                    batch_size= 64,
+                    validation_split= 0.4)
+
+# predict
+
+y_prob = model.predict(x_test)
+
+#-- convert into class
+
+y_pred = np.argmax(y_prob, axis=1)
+
+# print
+from sklearn.metrics import classification_report
+
+print('Classification Report: ', classification_report(y_test, y_pred)) '''
+
+# imports 
+
+from keras.models import Sequential
+from keras.layers import Conv2D,MaxPooling2D,Flatten,Dense
+from keras.metrics import Precision,Recall
+
+# build cnn
+
+model = keras.models.Sequential([
+    keras.layers.Conv2D(32,(3,3), activation= 'relu', input_shape= (28,28,1)),
+    keras.layers.MaxPooling2D(2,2),
+    keras.layers.Conv2D(32,(3,3), activation= 'relu'),
+    keras.layers.MaxPooling2D(2,2),
     keras.layers.Flatten(),
     keras.layers.Dense(128, activation='relu'),
     keras.layers.Dropout(0.5),

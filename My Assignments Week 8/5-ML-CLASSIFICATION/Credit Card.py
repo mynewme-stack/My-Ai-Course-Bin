@@ -53,7 +53,7 @@ app_df['UNEMPLOYED'] = (app_df['DAYS_EMPLOYED'] == 365243).astype(int)
 
 app_df['EMPLOYED'] = (app_df['DAYS_EMPLOYED']).replace(365243 , 0)      
 
-# get dummies
+# get dummies 
 
 app_df = pd.get_dummies(app_df, columns= ['CODE_GENDER','FLAG_OWN_CAR','FLAG_OWN_REALTY'
                     ,'NAME_INCOME_TYPE','NAME_EDUCATION_TYPE','NAME_FAMILY_STATUS',
