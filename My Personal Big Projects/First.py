@@ -12,3 +12,5 @@ def chat(message, history):
                       })
     return r.json()["response"]
 gr.ChatInterface(chat).launch()
+
+# ollama run qwen2.5:7b

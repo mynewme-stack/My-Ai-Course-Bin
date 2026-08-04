@@ -84,7 +84,7 @@ print(df.columns)
 
 column= ['CNT_CHILDREN', 'AMT_INCOME_TOTAL', 'DAYS_BIRTH', 'DAYS_EMPLOYED', 'FLAG_MOBIL', 'FLAG_WORK_PHONE', 'FLAG_PHONE', 'FLAG_EMAIL', 'CNT_FAM_MEMBERS', 'UNEMPLOYED', 'EMPLOYED', 'CODE_GENDER_M', 'FLAG_OWN_CAR_Y', 'FLAG_OWN_REALTY_Y','NAME_INCOME_TYPE_Working', 'NAME_EDUCATION_TYPE_Higher education', 'NAME_FAMILY_STATUS_Married','NAME_HOUSING_TYPE_House / apartment','OCCUPATION_TYPE_Unknown']
 
-'''
+
 for i in column: 
     plt.figure()
     sns.scatterplot(data=df, x = i, y = 'STATUS', hue='DAYS_EMPLOYED')
@@ -102,7 +102,6 @@ for i in column:
     plt.xticks(rotation=90)
     plt.show()
 
-'''
 
 # train test
 
