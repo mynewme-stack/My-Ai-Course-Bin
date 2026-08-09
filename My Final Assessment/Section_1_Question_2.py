@@ -146,12 +146,19 @@ plt.show()
 
 # encoding & feature engineering
 
+'''
+I asked some Medical students and they advised me to add this column and data to make model prectibility more 
+better. 
+
+'''
+
 unc_df['oldpeak_slope'] = unc_df['oldpeak']*unc_df['slope']
 
 '''
 RESEARCH WORK:
 
-if number is higher meaning more risk of heart diesease
+If number is greater meaning maybe more risk of heart diesease.
+
 '''
 
 unc_df['hr_age_ratio'] = unc_df['thalach'] / unc_df['age'] 
@@ -159,7 +166,8 @@ unc_df['hr_age_ratio'] = unc_df['thalach'] / unc_df['age']
 '''
 RESEARCH WORK:
 
-if thalach / age == lower number results in heartdisease. and if higher it would be normal person.
+If thalach / age == lower number may results in heartdisease and 
+if higher it would may result in no heart diesease.
 
 '''
 
@@ -308,7 +316,7 @@ print(classification_report(y_test, cbc_pre))
 
 print("_________________________________________________________")
 
-# result 
+# graphical analysis of models
 
 plt.barh(cvs_name, [i.mean() for i in cvss], color= ['skyblue', 'lightcoral', 'lightgreen', 'khaki', 'plum', 'powderblue', 'orange'])
 plt.title('Models CV mean comparison'); plt.xlabel('Mean Results')
@@ -329,3 +337,38 @@ comparison = pd.DataFrame({
 comparison.to_csv('My Final Assessment/Models_Results_Analysis/heart_diesease_result.csv', index=False)
 print(comparison)
 
+
+# confusion matrix
+
+from sklearn.metrics import confusion_matrix, ConfusionMatrixDisplay
+
+cm = confusion_matrix(y_test, cbc_pre)
+
+ConfusionMatrixDisplay(
+    confusion_matrix=cm,
+    display_labels=['No Disease', 'Disease']
+).plot()
+
+plt.title('CatBoost Confusion Matrix')
+plt.tight_layout()
+plt.show()
+
+# next graph
+
+from sklearn.metrics import confusion_matrix
+
+cm = confusion_matrix(y_test, rfc_pre)
+
+sns.heatmap(cm, annot=True, fmt='d', cmap='viridis',
+            xticklabels=['No Disease', 'Disease'],
+            yticklabels=['No Disease', 'Disease'])
+
+plt.title('Random Forest Confusion Matrix')
+plt.xlabel('Predicted Label')
+plt.ylabel('True Label')
+plt.tight_layout()
+plt.show()
+
+# final report
+
+print('\n\t\tCatBoost achieved the highest CV accuracy (80.08%) on this Dataset.')

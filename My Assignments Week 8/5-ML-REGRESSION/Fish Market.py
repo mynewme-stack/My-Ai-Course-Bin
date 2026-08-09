@@ -4,7 +4,7 @@ import numpy as np
 import pandas as pd
 
 df = pd.read_csv('My Assignments Week 8/Fish Market Dataset/Fish.csv')
-df_encod = pd.get_dummies(df, columns=['Species'], drop_first=True)  # it males seaparate columns  
+df_encod = pd.get_dummies(df, columns=['Species'], drop_first=True)  
 
 # Making graphs to study data
 

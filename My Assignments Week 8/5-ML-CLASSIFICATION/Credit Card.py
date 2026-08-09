@@ -1,10 +1,12 @@
+# This is my latest ml model implementation on dataset after learning from my past work
+
 import pandas as pd 
 import numpy as np
 import seaborn as sns
 import matplotlib.pyplot as plt
 from sklearn.model_selection import KFold
 
-# path
+# path 
 
 cre_df = pd.read_csv('My Assignments Week 8/Datasets_Download/credit_record.csv').copy()
 app_df = pd.read_csv('My Assignments Week 8/Datasets_Download/application_record.csv').copy()

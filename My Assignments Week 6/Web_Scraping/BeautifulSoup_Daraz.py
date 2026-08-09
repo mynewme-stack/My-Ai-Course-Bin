@@ -3,7 +3,7 @@ from bs4 import BeautifulSoup
 import csv
 
 
-with open('C:\\Users\\DELL\\OneDrive\\Documents\\GitHub\\My-Ai-Course-Bin\\My Assignments Week 2\\Website\\Daraz.pk.html', 'r', encoding='utf-8') as file:
+with open('C:\\Users\\DELL\\OneDrive\\Documents\\GitHub\\My-Ai-Course-Bin\\My Assignments Week 6\\Website\\Daraz.pk.html', 'r', encoding='utf-8') as file:
     soup = BeautifulSoup(file, 'html5lib')
 
 phones = []
@@ -18,7 +18,7 @@ for row in table.find_all('div', attrs={'class':'Bm3ON'}):
     phone['url']   = row.a['href']
     phones.append(phone)
 
-filename = 'My Assignments Week 2/Web_Scraped/cellphones_smartphones_Daraz.csv'
+filename = 'My Assignments Week 6/Web_Scraped/BS4_smartphones_Daraz.csv'
 with open (filename, 'w', newline='', encoding='utf-8-sig') as f:
     w= csv.DictWriter(f, ['title','price','img','url'])
     w.writeheader()

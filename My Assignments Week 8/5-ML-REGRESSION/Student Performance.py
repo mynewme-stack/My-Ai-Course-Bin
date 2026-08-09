@@ -15,7 +15,7 @@ Y = df['math score'].values
 # graph
 
 column = ['reading score', 'writing score', 'gender_male', 'race/ethnicity_group B', 'parental level of education_bachelor\'s degree','lunch_standard']
-'''
+
 for col in column:
     plt.figure()
     sns.scatterplot(data=df, x=col, y="math score").set(title=f'General plot of {col}');
@@ -35,7 +35,7 @@ for col in column:
     plt.figure()
     sns.lineplot(data=df, x=col, y="math score").set(title=f'lineplot of {col}');
     plt.show()
-'''
+
 from sklearn.preprocessing import StandardScaler
 scaler = StandardScaler()
 
@@ -65,6 +65,7 @@ l_score = l.predict(x_test)
 rfr_score = rfr.predict(x_test)
 
 # cross_ val
+
 from sklearn.model_selection import cross_val_score
 
 lr_cvs = cross_val_score(LinearRegression(), x_scale, Y, cv= 15)

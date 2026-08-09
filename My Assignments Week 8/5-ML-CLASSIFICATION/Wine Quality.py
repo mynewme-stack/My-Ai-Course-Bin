@@ -33,7 +33,7 @@ df_use = pd.get_dummies(df, columns=['wine_type'], drop_first=True)
 print(df_use.columns)
 
 column = ['fixed acidity', 'volatile acidity', 'citric acid', 'residual sugar', 'chlorides', 'free sulfur dioxide', 'total sulfur dioxide', 'density', 'pH', 'sulphates', 'alcohol', 'wine_type']
-'''
+
 # General
 for col in column:
     plt.figure()
@@ -45,7 +45,7 @@ for col in column:
     plt.figure()
     sns.histplot(data=df_use, x=col, y='quality').set(title=f'Regression plot of {col}');
     plt.show()
-'''
+
 # classifying data
 
 X= df_use.drop(columns=['quality']).values

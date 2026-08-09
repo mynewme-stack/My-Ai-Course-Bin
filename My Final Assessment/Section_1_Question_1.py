@@ -3,6 +3,9 @@ import pandas as pd
 import seaborn as sns
 import matplotlib.pyplot as plt
 
+'''
+Cleaning Data
+'''
 # file
 
 un_df= pd.read_csv('My Final Assessment\\Datasets_Used\\USA-Hospitals\\Hospitals.csv')
@@ -11,7 +14,7 @@ un_df= pd.read_csv('My Final Assessment\\Datasets_Used\\USA-Hospitals\\Hospitals
 
 print('Missing values : ', un_df.isnull().sum())
 
-# cz my target has a missing value i am deleting that row
+# cleaning data
 
 un_df = un_df.dropna(subset=["ALT_NAME",'ST_FIPS','OWNER','TTL_STAFF','BEDS','TRAUMA','HELIPAD'])
 
@@ -29,6 +32,7 @@ print('Duplicate rows : ', dupli_row)
 
 print("_____________________________________")
 
+
 #--- ids should be unique
 
 dupli_id = un_df.duplicated(subset='ID').sum()
@@ -36,6 +40,7 @@ dupli_id = un_df.duplicated(subset='ID').sum()
 print('Duplicate ids : ',dupli_id)
 
 print("_____________________________________")
+
 
 # Overview
 
@@ -61,11 +66,13 @@ print('Before Removal -999: ',un_df['BEDS'].mean())
 
 print("__________________________________________")
 
+# -999 a special number which is making just 8% of beds and i dont want to risk model learning so removing
+
 con_beds = un_df.loc[un_df['BEDS'] < 0, 'BEDS'].tolist()
 unique = set(con_beds)
 
 if unique == {-999}:
-    print('\nOnly -999')
+    print('\nOnly -999') 
 else:
     print('\n\nOther List: ', con_beds)
 
@@ -76,7 +83,7 @@ print("_____________________________________")
 percentage = (un_df['BEDS'] == -999).mean() * 100
 print(f"Percentage of -999: {percentage}%")
 
-#--- remove -999
+#--- remove -999 
 
 un_df = un_df[un_df['BEDS'] >= 0]
 print('After Removal of -999: ',un_df['BEDS'].mean())
@@ -111,11 +118,14 @@ print("_____________________________________")
 
 #--- graphs to study which columns are useless
 
-column = ['TYPE', 'STATUS', 'POPULATION', 'ST_FIPS', 'OWNER', 'TTL_STAFF', 'TRAUMA', 'HELIPAD']
-col_n = ['TYPE', 'STATUS', 'POPULATION', 'ST_FIPS', 'OWNER', 'TTL_STAFF', 'TRAUMA', 'HELIPAD']
+column = ['TYPE','STATUS', 'POPULATION', 'ST_FIPS', 'OWNER', 'TTL_STAFF', 'TRAUMA', 'HELIPAD']
+col_n = ['TYPE','STATUS', 'POPULATION', 'ST_FIPS', 'OWNER', 'TTL_STAFF', 'TRAUMA', 'HELIPAD']
 
 j=0
 
+'''
+Graphical Visualiztion
+'''
 
 for i in column:
     sns.set_theme(style='whitegrid')
@@ -129,6 +139,38 @@ for i in column:
     j+=1
 
 
+#--- proof classification
+
+column = ['TYPE','STATUS', 'ST_FIPS', 'OWNER', 'TTL_STAFF', 'TRAUMA', 'HELIPAD']
+col_n = ['TYPE','STATUS', 'ST_FIPS', 'OWNER', 'TTL_STAFF', 'TRAUMA', 'HELIPAD']
+
+j=0
+
+for i in column:
+    sns.set_theme(style='whitegrid')
+    sns.countplot(
+    data=un_df,
+    x=i,
+    hue='BEDS_CATEGORY')
+    plt.xlabel(col_n[j])
+    plt.ylabel('BEDS_CATEGORY')
+    plt.xticks(rotation= 90)
+    plt.tight_layout()
+    plt.show()
+    j+=1
+
+#----- data analysis using pie chart
+
+print(un_df['BEDS_CATEGORY'].value_counts(normalize=True).sort_index() * 100)    
+
+plt.pie(un_df['BEDS_CATEGORY'].value_counts(), labels=['Small', 'Medium', 'Large'], autopct='%1.1f%%',
+        colors=['skyblue', 'lightgreen', 'peachpuff'],
+        wedgeprops={'linewidth': 0.2, 'edgecolor': 'grey'})
+
+plt.title('Data Classification')
+plt.tight_layout()
+plt.show()
+
 #--- enocoding
 
 df = pd.get_dummies(un_df, columns=['TYPE', 'STATUS','OWNER', 'ST_FIPS', 'TRAUMA', 'HELIPAD'], drop_first=True)
@@ -139,48 +181,35 @@ print('Missing values in TTL_STAFF, POPULATION : ', df[['POPULATION','TTL_STAFF'
 
 print("_____________________________________")
 
-#--- proof classification
-
-column = ['TYPE', 'STATUS', 'ST_FIPS', 'OWNER', 'TTL_STAFF', 'TRAUMA', 'HELIPAD']
-col_n = ['TYPE', 'STATUS', 'ST_FIPS', 'OWNER', 'TTL_STAFF', 'TRAUMA', 'HELIPAD']
-
-j=0
-
-for i in column:
-    sns.set_theme(style='whitegrid')
-    sns.histplot(df, x=i, hue='BEDS_CATEGORY',
-                            palette=["darkcyan", "goldenrod", "tomato"])
-    plt.xlabel(col_n[j])
-    plt.ylabel('BEDS_CATEGORY')
-    plt.xticks(rotation= 90)
-    plt.tight_layout()
-    plt.show()
-    j+=1
-
-#----- data analysis
-
-plt.pie(un_df['BEDS_CATEGORY'].value_counts(), labels=['Small', 'Medium', 'Large'], autopct='%1.1f%%',
-        colors=['skyblue', 'lightgreen', 'peachpuff'],
-        wedgeprops={'linewidth': 0.2, 'edgecolor': 'grey'})
-
-plt.title('Data Classification')
-plt.tight_layout()
-plt.show()
-
-
 #--- kfold
-from sklearn.model_selection import KFold
 
-Kf = KFold(n_splits=6, shuffle=True, random_state=20)
+from sklearn.model_selection import StratifiedKFold
+
+Kf = StratifiedKFold(
+    n_splits=6,
+    shuffle=True,
+    random_state=20)
 
 # x and y
 
 '''
-My target is to find whether a hospital is small, medium or large on the basis of number of beds in hospital.
+My target is to find whether a hospital is small, medium or large on the basis of number of beds available
+in hospital.
 
 '''
 
-X=  df.drop(columns=['BEDS_CATEGORY','TTL_STAFF']).values  #after also dropping "TTL_STAFF" 
+X=  df.drop(columns=['BEDS_CATEGORY','TTL_STAFF']).values
+
+X_ts = df.drop(columns=['BEDS_CATEGORY']).values
+
+'''
+After Analyzing first time, i decided to remove ttl_staff because ttl_staff has a very strong relationship with
+hospital size. Therefore, I evaluated models both with and without TTL_STAFF to determine 
+whether the classification task was genuinely learning or not. Because Decision Tree Classifier doing best
+so i m training data with total staff with only this model.
+
+'''
+
 Y= df['BEDS_CATEGORY'].astype(int)
 
 # train_test_split
@@ -188,6 +217,11 @@ Y= df['BEDS_CATEGORY'].astype(int)
 from sklearn.model_selection import train_test_split
 
 x_train, x_test, y_train, y_test = train_test_split(X,Y , train_size=0.80, random_state=20, stratify= Y)
+
+#-- with ttl _ staff
+
+x_train_ts, x_test_ts, y_train_ts, y_test_ts = train_test_split(X_ts,Y 
+                            , train_size=0.80, random_state=20, stratify= Y)
 
 # scaling
 
@@ -198,7 +232,6 @@ scaler = RobustScaler()
 x_train_s = scaler.fit_transform(x_train)
 x_test_s = scaler.transform(x_test)
 
-
 # algorithm 
 
 from sklearn.linear_model import LogisticRegression
@@ -207,12 +240,13 @@ from sklearn.ensemble import RandomForestClassifier
 from xgboost import XGBClassifier
 from sklearn.neighbors import KNeighborsClassifier
 
-from sklearn.metrics import classification_report
+from sklearn.metrics import classification_report, confusion_matrix, ConfusionMatrixDisplay
 
 # name 
 
 lr = LogisticRegression(max_iter=1000,class_weight='balanced')
 dtc = DecisionTreeClassifier(class_weight='balanced')
+dtc_ts = DecisionTreeClassifier(class_weight='balanced')
 rfc = RandomForestClassifier(class_weight='balanced')
 xgbc = XGBClassifier(eval_metric= 'mlogloss')
 knc = KNeighborsClassifier()
@@ -221,6 +255,7 @@ knc = KNeighborsClassifier()
 
 lr.fit(x_train_s, y_train)
 dtc.fit(x_train, y_train)
+dtc_ts.fit(x_train_ts, y_train_ts)
 rfc.fit(x_train, y_train)
 xgbc.fit(x_train, y_train)
 knc.fit(x_train_s,y_train)
@@ -229,6 +264,7 @@ knc.fit(x_train_s,y_train)
 
 lr_pre = lr.predict(x_test_s)
 dtc_pre = dtc.predict(x_test)
+dtc_pre_ts = dtc_ts.predict(x_test_ts)
 rfc_pre = rfc.predict(x_test)
 xgbc_pre = xgbc.predict(x_test)
 knc_pre = knc.predict(x_test_s)
@@ -247,6 +283,7 @@ knc_pipe = make_pipeline(RobustScaler(), KNeighborsClassifier())
 
 lr_cvs = cross_val_score(lr_pipe, X,Y ,cv= Kf)
 dtc_cvs = cross_val_score(DecisionTreeClassifier(class_weight='balanced'), X,Y ,cv= Kf)
+dtc_cvs_ts = cross_val_score(DecisionTreeClassifier(class_weight='balanced'), X_ts,Y ,cv= Kf)
 rfc_cvs = cross_val_score(RandomForestClassifier(class_weight='balanced'), X,Y ,cv= Kf)
 xgbc_cvs = cross_val_score(XGBClassifier(eval_metric= 'mlogloss'), X,Y ,cv= Kf)
 knc_cvs = cross_val_score(knc_pipe, X,Y ,cv= Kf)
@@ -254,8 +291,8 @@ knc_cvs = cross_val_score(knc_pipe, X,Y ,cv= Kf)
 
 # result 
 
-cvss = [lr_cvs,dtc_cvs,rfc_cvs,xgbc_cvs,knc_cvs]
-cvs_name = ['lr_cvs','dtc_cvs','rfc_cvs','xgbc_cvs','knc_cvs']
+cvss = [lr_cvs,dtc_cvs,dtc_cvs_ts,rfc_cvs,xgbc_cvs,knc_cvs]
+cvs_name = ['lr_cvs','dtc_cvs','dtc_cvs_ts','rfc_cvs','xgbc_cvs','knc_cvs']
 
 j= 0
 
@@ -267,8 +304,8 @@ print("_________________________________________________________________________
 
 # result mean
 
-cvss = [lr_cvs,dtc_cvs,rfc_cvs,xgbc_cvs,knc_cvs]
-cvs_name = ['lr_cvs','dtc_cvs','rfc_cvs','xgbc_cvs','knc_cvs']
+cvss = [lr_cvs,dtc_cvs,dtc_cvs_ts,rfc_cvs,xgbc_cvs,knc_cvs]
+cvs_name = ['lr_cvs','dtc_cvs','dtc_cvs_ts','rfc_cvs','xgbc_cvs','knc_cvs']
 
 j= 0
 
@@ -278,36 +315,38 @@ for i in cvss:
 
 print("__________________________________________________________________________")
 
-# repot
+# report
 
 print(classification_report(y_test, lr_pre))
 print(classification_report(y_test, dtc_pre))
+print(classification_report(y_test_ts, dtc_pre_ts))
 print(classification_report(y_test, rfc_pre))
 print(classification_report(y_test, xgbc_pre))
 print(classification_report(y_test, knc_pre))
 
 print("______________________________________________________________________________________")
 
-# results 
-
-'''
-Logistic Regression Accuracy: 93% 
-Decision Tree Accuracy: 100% 
-Random Forest Accuracy: 100% 
-XGBoost Accuracy: 100% 
-KNN Accuracy: 91%
-
-'''
-
 # observations
 
 '''
 
 As, ttl_staff and population depends very directly to the hospital is small, medium and large.
-TTL_STAFF and POPULATION has a very direct relationship that makes models to predict very precisely.
-
+So, If these two features are available, model can predict size of hospital very precisely. 
+A Decision Tree using TTL_STAFF got the highest score of 99.68% accuracy. 
+A standard Decision Tree got 99.67% accuracy. 
+The tiny difference means both models work almost the same way here.
 
 '''
+
+# graphical analysis of models
+
+i = 0
+
+plt.barh(cvs_name, [i.mean() for i in cvss], color= ['skyblue', 'lightcoral', 'lightgreen', 'khaki', 'plum', 'pink'])
+plt.title('6 Fold Cross Validation Performance')
+plt.xlabel('Mean Cross Validation Accuracy')
+plt.tight_layout()
+plt.show()
 
 # result csv
 
@@ -315,8 +354,29 @@ comparison = pd.DataFrame({
     'Actual': y_test,
     'LR_Predicted':lr_pre,
     'DTC_Predicted':dtc_pre,
+    'DTC_TS_Predicted': dtc_pre_ts,
     'RFC_Predicted': rfc_pre,
     'XGBC_Predicted': xgbc_pre,
     'KNC_Predicted':knc_pre})
 comparison.to_csv('My Final Assessment/Models_Results_Analysis/hospital_beds_result.csv', index=False)
 print(comparison)
+
+
+# confusion Matrix - Best Model
+
+cm = confusion_matrix(y_test_ts, dtc_pre_ts)
+
+disp = ConfusionMatrixDisplay(
+    confusion_matrix=cm,
+    display_labels=['Small', 'Medium', 'Large']
+)
+
+
+disp.plot()
+plt.title('Decision Tree Confusion Matrix')
+plt.tight_layout()
+plt.show()
+
+# final report
+
+print('\n\t\tDecision Tree with TTL_STAFF achieved the highest CV accuracy (99.68%).')

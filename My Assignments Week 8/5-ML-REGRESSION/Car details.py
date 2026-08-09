@@ -5,6 +5,7 @@ import matplotlib.pyplot as plt
 from sklearn.model_selection import KFold
 
 # file path
+
 dff = pd.read_csv('My Assignments Week 8\Datasets_Download\Car details v3.csv')
 
 df_clean = dff.copy()
@@ -41,7 +42,7 @@ kf = KFold(n_splits=5, shuffle= True, random_state= 30)
 print(df.columns)
 
 column = ['year', 'selling_price', 'km_driven', 'mileage', 'engine', 'max_power', 'seats', 'fuel_Diesel', 'seller_type_Trustmark Dealer', 'transmission_Manual', 'owner_Fourth & Above Owner', 'brand_Ashok']
-'''
+
 for col in column:
     plt.figure()
     sns.lineplot(data=df, x=col, y="selling_price").set(title=f'line plot of {col}');
@@ -52,17 +53,18 @@ for col in column:
     sns.regplot(data=df, x=col, y='selling_price').set(title=f'regplot plot of {col}');
     plt.show()
 
-'''
-
 # linear models
+
 from sklearn.linear_model import Ridge
 
 # tree
+
 from sklearn.tree import DecisionTreeRegressor
 from sklearn.ensemble import RandomForestRegressor
 from xgboost import XGBRegressor
 
 # naming 
+
 r = Ridge()
 dtr = DecisionTreeRegressor()
 rfr = RandomForestRegressor()
@@ -74,10 +76,12 @@ X = df.drop(columns=['selling_price']).values
 Y = df['selling_price'].values
 
 # train test
+
 from sklearn.model_selection import train_test_split
 x_train_ns, x_test_ns, y_train, y_test  = train_test_split(X,Y, train_size= 0.9, random_state= 30)
 
 # standard scale 
+
 from sklearn.preprocessing import StandardScaler
 scale = StandardScaler()
 
@@ -99,9 +103,11 @@ rfr_pre = rfr.predict(x_test_ns)
 xgbr_pre = xgbr.predict(x_test_ns)
 
 # cross
+
 from sklearn.model_selection import cross_val_score
 
 # pipeline
+
 from sklearn.pipeline import make_pipeline
 
 r_p = make_pipeline(StandardScaler(),Ridge())
@@ -134,6 +140,7 @@ for i in cvss:
     j += 1
 
 # result
+
 comparison = pd.DataFrame({
     'Actual': y_test,
     'R_Predicted':r_pre,

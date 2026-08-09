@@ -19,10 +19,13 @@ for p in phonesDiv:
     phone['img'] = p.find_element(By.TAG_NAME, "img").get_attribute('src')
    
     phoneList.append(phone)
-file_name = 'My Assignments Week 2/Web_Scraped/selenium_cellphones_smartphones_ebay.csv' 
+file_name = 'My Assignments Week 6/Web_Scraped/selenium_smartphones_ebay.csv' 
 with open (file_name, 'w', newline='', encoding='utf-8') as f:
     w= csv.DictWriter(f,['title','price','img'])
     w.writeheader()
     for phone in phoneList:
         w.writerow(phone)
 driver.close()
+
+
+# Note: The code has not been updated since month. 

@@ -40,7 +40,7 @@ print(df.columns)
 
 column =  ['Pclass', 'Age', 'SibSp', 'Parch', 'Fare', 'Sex_male', 'Embarked_Q', 'Deck_B'] 
 
-'''
+
 for i in column: 
     plt.figure()
     sns.scatterplot(data=df, x = i, y = 'Survived', hue='Age')
@@ -57,7 +57,6 @@ for i in column:
     sns.boxplot(data=df, x = i, y = 'Survived')
     plt.xticks(rotation=90)
     plt.show()
-'''
     
 # kfold
 

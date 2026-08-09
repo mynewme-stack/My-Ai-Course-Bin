@@ -2,7 +2,7 @@ import requests
 from bs4 import BeautifulSoup
 import csv
 
-with open('C:\\Users\\DELL\\OneDrive\\Documents\\GitHub\\My-Ai-Course-Bin\\My Assignments Week 2\\Website\\Alibaba.html', 'r', encoding='utf-8') as file:
+with open('C:\\Users\\DELL\\OneDrive\\Documents\\GitHub\\My-Ai-Course-Bin\\My Assignments Week 6\\Website\\Alibaba.html', 'r', encoding='utf-8') as file:
     soup = BeautifulSoup(file, 'html5lib')
 
 phones= []
@@ -14,7 +14,7 @@ for row in table.find_all('div', attrs={'class':'fy26-product-card-wrapper'}):
     phone['img']   = row.img['src']
     phone['url']   = row.a['href']
     phones.append(phone)
-file_name = 'My Assignments Week 2/Web_Scraped/cellphones_smartphones_Alibaba.csv'
+file_name = 'My Assignments Week 6/Web_Scraped/BS4_smartphones_Alibaba.csv'
 with open(file_name, 'w', newline='', encoding='utf-8-sig') as f:
     w = csv.DictWriter(f, ['title','price','img','url'])
     w.writeheader()
