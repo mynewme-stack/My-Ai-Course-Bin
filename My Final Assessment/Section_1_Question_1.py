@@ -203,7 +203,9 @@ X=  df.drop(columns=['BEDS_CATEGORY','TTL_STAFF']).values
 X_ts = df.drop(columns=['BEDS_CATEGORY']).values
 
 '''
-After Analyzing first time, i decided to remove ttl_staff because ttl_staff has a very strong relationship with
+After Analyzing first time,
+Almost every single record in Hospitals.csv (7,569 out of 7,570 rows) has TTL_STAFF = -999 (missing place holder).
+i decided to remove ttl_staff because ttl_staff has a very strong relationship with
 hospital size. Therefore, I evaluated models both with and without TTL_STAFF to determine 
 whether the classification task was genuinely learning or not. Because Decision Tree Classifier doing best
 so i m training data with total staff with only this model.
@@ -335,6 +337,9 @@ So, If these two features are available, model can predict size of hospital very
 A Decision Tree using TTL_STAFF got the highest score of 99.68% accuracy. 
 A standard Decision Tree got 99.67% accuracy. 
 The tiny difference means both models work almost the same way here.
+But after seaching on Google and wikipedia:
+ttl_staff is interal operational metric 
+while population is also the most affecting feature to our target but its an external affecting feature.
 
 '''
 
