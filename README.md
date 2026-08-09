@@ -4,7 +4,7 @@ AI/ML training log — practical assignments, experiments, and applied projects.
 
 Next Goal 🎯 : 
 
-I will work on a SaaS project.
+AI-powered text summarizer
 
 📌 About
 
